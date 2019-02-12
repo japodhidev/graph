@@ -15,14 +15,22 @@ Y.append(1)
 
 graph = dash.Dash(__name__)
 
-server = graph.server
-
 
 graph.config.requests_pathname_prefix = graph.config.routes_pathname_prefix.split('/')[-1]
 
-graph.layout = html.Div(
-    [
-        dcc.Graph(id='live-graph', animate=True),
+graph.layout = html.Div(children=[
+		html.H1(children="Graph Heading"),
+
+    	html.H2(children='''
+    		Graph Description
+    		'''),
+
+        dcc.Graph(id='live-graph', animate=True,
+        	figure={
+        		'layout': {
+        			'title' : 'Graph Data Visualization'
+        		}
+        	}),
         dcc.Interval(
             id='graph-update',
             interval=2*1000,
@@ -50,7 +58,7 @@ def update_graph_scatter(n):
 												)
 	}
 
-
+server = graph.server
 
 
 if __name__ == '__main__':
