@@ -18,9 +18,9 @@ Y.append(1)
 # app = Flask(__name__)
 graph = dash.Dash(__name__)
 
-# @app.route('/')
-# def hey_there():
-# 	return 'Hey there.'
+@app.route('/')
+def hey_there():
+	return 'Hey there.'
 
 
 graph.config.requests_pathname_prefix = graph.config.routes_pathname_prefix.split('/')[-1]
