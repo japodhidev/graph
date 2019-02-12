@@ -1,1 +1,1 @@
-web: gunicorn app:graph --log-file=-
+web: flask run
