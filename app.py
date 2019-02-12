@@ -1,6 +1,3 @@
-#!/usr/bin/python3
-from flask import Flask
-
 import dash
 from dash.dependencies import Input, Output
 import dash_core_components as dcc
@@ -16,14 +13,9 @@ X.append(1)
 Y = deque(maxlen=20)
 Y.append(1)
 
-app = Flask(__name__)
 graph = dash.Dash(__name__)
 
-# @app.route('/app')
-
-@app.route('/')
-def hey_there():
-	return 'Hey there.'
+server = graph.server
 
 
 graph.config.requests_pathname_prefix = graph.config.routes_pathname_prefix.split('/')[-1]
@@ -59,9 +51,7 @@ def update_graph_scatter(n):
 	}
 
 
-server = graph.server
 
-@app.route('/')
-def app():
-	if __name__ == '__main__':
-	    graph.run_server(debug=True)
+
+if __name__ == '__main__':
+	graph.run_server(debug=True)
