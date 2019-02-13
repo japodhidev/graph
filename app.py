@@ -45,9 +45,9 @@ def update_graph_scatter(n):
 
     return {'data': [data],
             'layout' : go.Layout(
-                title='Sensor Data Visualisation',
-                xaxis=dict(range=[min(X),max(X)], title= 'x-axis'), 
-                yaxis=dict(range=[min(Y),max(Y)], title= 'x-axis')
+                title={'text': 'Vibration Analysis'},
+                xaxis=dict(range=[min(X),max(X)], title= 'Displacement', gridcolor='#bdbdbd', gridwidth=1), 
+                yaxis=dict(range=[min(Y),max(Y)], title= 'x-axis', gridcolor='#bdbdbd', gridwidth=1)
             )
     }
 
