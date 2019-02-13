@@ -1,58 +1,71 @@
-import dash
-from dash.dependencies import Input, Output
-import dash_core_components as dcc
-import dash_html_components as html
-import plotly
-import random
-import plotly.graph_objs as go
-from collections import deque
+# import dash
+# from dash.dependencies import Input, Output
+# import dash_core_components as dcc
+# import dash_html_components as html
+# import plotly
+# import random
+# import plotly.graph_objs as go
+# from collections import deque
 
-X = deque(maxlen=20)
-X.append(1)
-Y = deque(maxlen=20)
-Y.append(1)
+# X = deque(maxlen=20)
+# X.append(1)
+# Y = deque(maxlen=20)
+# Y.append(1)
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+# app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-app.config.requests_pathname_prefix = app.config.routes_pathname_prefix.split('/')[-1]
+# app.config.requests_pathname_prefix = app.config.routes_pathname_prefix.split('/')[-1]
 
-app.layout = html.Div(children=[
-        html.H1(id='header', children='Data Visualisation Graph'),
-        dcc.Graph(id='live-graph', animate=True),
-        dcc.Interval(
-            id='graph-update',
-            interval=2*1000,
-            n_intervals=0
-        ),
-    ]
-)
+# app.layout = html.Div(children=[
+#         html.H1(id='header', children='Data Visualisation Graph'),
+#         dcc.Graph(id='live-graph', animate=True),
+#         dcc.Interval(
+#             id='graph-update',
+#             interval=2*1000,
+#             n_intervals=0
+#         ),
+#     ]
+# )
 
-@app.callback(Output('live-graph', 'figure'),
-              [Input('graph-update', 'n_intervals')])
+# @app.callback(Output('live-graph', 'figure'),
+#               [Input('graph-update', 'n_intervals')])
 
-def update_graph_scatter(n):
-    X.append(X[-1]+1)
-    Y.append(Y[-1]+Y[-1]*random.uniform(-0.1,0.1))
+# def update_graph_scatter(n):
+#     X.append(X[-1]+1)
+#     Y.append(Y[-1]+Y[-1]*random.uniform(-0.1,0.1))
 
-    data = go.Scatter(
-            x=list(X),
-            y=list(Y),
-            name='Scatter',
-            mode= 'lines+markers'
-            )
+#     data = go.Scatter(
+#             x=list(X),
+#             y=list(Y),
+#             name='Scatter',
+#             mode= 'lines+markers'
+#             )
 
-    return {'data': [data],
-            'layout' : go.Layout(
-                title={'text': 'Vibration Analysis'},
-                xaxis=dict(range=[min(X),max(X)], title= '', gridcolor='#bdbdbd', gridwidth=1), 
-                yaxis=dict(range=[min(Y),max(Y)], title= 'Displacement', gridcolor='#bdbdbd', gridwidth=1)
-            )
-    }
+#     return {'data': [data],
+#             'layout' : go.Layout(
+#                 title={'text': 'Vibration Analysis'},
+#                 xaxis=dict(range=[min(X),max(X)], title= '', gridcolor='#bdbdbd', gridwidth=1), 
+#                 yaxis=dict(range=[min(Y),max(Y)], title= 'Displacement', gridcolor='#bdbdbd', gridwidth=1)
+#             )
+#     }
 
 
-server = app.server
+# server = app.server
+
+# if __name__ == '__main__':
+#     app.run_server(debug=True)
+
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/', methods=['POST'])
+def pi():
+    pi_data = request.json
+    print(f'Value from client {pi_data}')
+    return jsonify(pi_data)
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run(debug=True)
