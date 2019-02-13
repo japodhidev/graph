@@ -5,7 +5,7 @@
 # import plotly
 # import random
 # import plotly.graph_objs as go
-# from collections import deque
+from collections import deque
 
 # X = deque(maxlen=20)
 # X.append(1)
@@ -58,19 +58,25 @@
 #     app.run_server(debug=True)
 
 from flask import Flask, request, jsonify
+import json
 
 app = Flask(__name__)
 
-@app.route('/', methods=['POST'])
-def pi():
-    pi_data = request.json
-    print(f'Value from client {pi_data}')
-    return jsonify(pi_data)
+X = deque(maxlen=20)
 
-@app.route('/')
-def gets():
-    data = pi()
-    print (data)
-    
+
+@app.route('/', methods=['POST', 'GET'])
+def pi():
+
+    if request.method == 'POST':
+        pi_data = request.json
+        print(f'Value from client {pi_data}')
+        for i in pi_data:
+            X.append(pi_data[i])
+        print (list(X))
+        return jsonify(pi_data)
+    if request.method == 'GET':
+        return str(X)
+print ()
 if __name__ == '__main__':
     app.run(debug=True)
