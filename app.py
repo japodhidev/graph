@@ -19,7 +19,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.config.requests_pathname_prefix = app.config.routes_pathname_prefix.split('/')[-1]
 
 app.layout = html.Div(children=[
-        html.H1(id='header', children='Graph'),
+        html.H1(id='header', children='Data Visualisation Graph'),
         dcc.Graph(id='live-graph', animate=True),
         dcc.Interval(
             id='graph-update',
@@ -46,8 +46,8 @@ def update_graph_scatter(n):
     return {'data': [data],
             'layout' : go.Layout(
                 title={'text': 'Vibration Analysis'},
-                xaxis=dict(range=[min(X),max(X)], title= 'Displacement', gridcolor='#bdbdbd', gridwidth=1), 
-                yaxis=dict(range=[min(Y),max(Y)], title= 'x-axis', gridcolor='#bdbdbd', gridwidth=1)
+                xaxis=dict(range=[min(X),max(X)], title= '', gridcolor='#bdbdbd', gridwidth=1), 
+                yaxis=dict(range=[min(Y),max(Y)], title= 'Displacement', gridcolor='#bdbdbd', gridwidth=1)
             )
     }
 
