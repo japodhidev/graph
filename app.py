@@ -7,30 +7,20 @@ import random
 import plotly.graph_objs as go
 from collections import deque
 
-
 X = deque(maxlen=20)
 X.append(1)
 Y = deque(maxlen=20)
 Y.append(1)
 
-graph = dash.Dash(__name__)
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-graph.config.requests_pathname_prefix = graph.config.routes_pathname_prefix.split('/')[-1]
+app.config.requests_pathname_prefix = app.config.routes_pathname_prefix.split('/')[-1]
 
-graph.layout = html.Div(children=[
-		html.H1(children="Graph Heading"),
-
-    	html.H2(children='''
-    		Graph Description
-    		'''),
-
-        dcc.Graph(id='live-graph', animate=True,
-        	figure={
-        		'layout': {
-        			'title' : 'Graph Data Visualization'
-        		}
-        	}),
+app.layout = html.Div(children=[
+        html.H1(id='header', children='Graph'),
+        dcc.Graph(id='live-graph', animate=True),
         dcc.Interval(
             id='graph-update',
             interval=2*1000,
@@ -39,27 +29,30 @@ graph.layout = html.Div(children=[
     ]
 )
 
-@graph.callback(Output('live-graph', 'figure'),
+@app.callback(Output('live-graph', 'figure'),
               [Input('graph-update', 'n_intervals')])
 
 def update_graph_scatter(n):
-	X.append(X[-1]+1)
-	Y.append(Y[-1]+Y[-1]*random.uniform(-0.1,0.1))
+    X.append(X[-1]+1)
+    Y.append(Y[-1]+Y[-1]*random.uniform(-0.1,0.1))
 
-	data = plotly.graph_objs.Scatter(
-			x=list(X),
-			y=list(Y),
-			name='Scatter',
-			mode= 'lines+markers'
-			)
+    data = go.Scatter(
+            x=list(X),
+            y=list(Y),
+            name='Scatter',
+            mode= 'lines+markers'
+            )
 
-	return {'data': [data],'layout' : go.Layout(xaxis=dict(range=[min(X),max(X)]),
-												yaxis=dict(range=[min(Y),max(Y)])
-												)
-	}
+    return {'data': [data],
+            'layout' : go.Layout(
+                title='Sensor Data Visualisation',
+                xaxis=dict(range=[min(X),max(X)], title= 'x-axis'), 
+                yaxis=dict(range=[min(Y),max(Y)], title= 'x-axis')
+            )
+    }
 
-server = graph.server
 
+server = app.server
 
 if __name__ == '__main__':
-	graph.run_server(debug=True)
+    app.run_server(debug=True)
