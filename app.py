@@ -67,5 +67,10 @@ def pi():
     print(f'Value from client {pi_data}')
     return jsonify(pi_data)
 
+@app.route('/')
+def gets():
+    data = pi()
+    print (data)
+    
 if __name__ == '__main__':
     app.run(debug=True)
