@@ -63,20 +63,44 @@ import json
 app = Flask(__name__)
 
 X = deque(maxlen=20)
-
+yaxis = [5]
+xaxis = [5]
+zaxis = [5]
 
 @app.route('/', methods=['POST', 'GET'])
 def pi():
 
     if request.method == 'POST':
         pi_data = request.json
-        print(f'Value from client {pi_data}')
-        for i in pi_data:
-            X.append(pi_data[i])
-        print (list(X))
+        # print(f'Value from client {pi_data}')
+        append_list(pi_data)
+        # for i in pi_data:
+        #     # X.append(pi_data[i])
+        #     print ("i: ", pi_data[i])
+        # print ("Here: ", list(X))
+        # append_list(X)
         return jsonify(pi_data)
     if request.method == 'GET':
-        return str(X)
-print ()
+        # print ("y: ", yaxis)
+        # print ("x: ", xaxis)
+        # print ("z: ", zaxis)
+        return str(xaxis)
+
+def append_list(dq_x):
+    counter = 0
+    for elem in dq_x:
+        if counter == 0:
+            yaxis.append(dq_x[elem])
+        elif counter == 1:
+            xaxis.append(dq_x[elem])
+        elif counter == 2:
+            zaxis.append(dq_x[elem])
+        counter = counter + 1
+    print ("element: ", type(elem))
+
+xaxis = xaxis[-1000:]
+yaxis = yaxis[-1000:]
+zaxis = zaxis[-1000:]
+
 if __name__ == '__main__':
     app.run(debug=True)
