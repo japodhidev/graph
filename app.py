@@ -10,6 +10,7 @@ from collections import deque
 # Flask specific imports
 from flask import Flask, request, jsonify
 import json
+from flask import render_template
 
 # Initialise Flask app
 app = Flask(__name__)
@@ -27,7 +28,7 @@ Y.append(1)
 
 
 @app.route('/', methods=['POST', 'GET'])
-def pi():
+def pi(name=None):
 
     if request.method == 'POST':
         pi_data = request.json
@@ -43,8 +44,9 @@ def pi():
         # print ("y: ", yaxis)
         # print ("x: ", xaxis)
         # print ("z: ", zaxis)
-        lst = str(xaxis) + str(yaxis)
-        return lst
+        x_lst = str(xaxis)
+        y_lst = str(yaxis)
+        return render_template('index.html', xa=x_lst, ya=y_lst)
 
 def append_list(dq_x):
     counter = 0
@@ -57,54 +59,6 @@ def append_list(dq_x):
             xaxis.append(dq_x[elem])
         counter = counter + 1
     print ("element: ", type(elem))
-
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
-graph = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
-graph.config.requests_pathname_prefix = graph.config.routes_pathname_prefix.split('/')[-1]
-
-graph.layout = html.Div(children=[
-        html.H1(id='header', children='Data Visualisation Graph'),
-        dcc.Graph(id='live-graph', animate=True),
-        dcc.Interval(
-            id='graph-update',
-            interval=2*1000,
-            n_intervals=0
-        ),
-    ]
-)
-
-@graph.callback(Output('live-graph', 'figure'),
-              [Input('graph-update', 'n_intervals')])
-
-def update_graph_scatter(n):
-    X.append(X[-1]+1)
-    Y.append(Y[-1]+Y[-1]*random.uniform(-0.1,0.1))
-
-    data = go.Scatter(
-            x=list(xaxis),
-            y=list(Y),
-            name='Scatter',
-            mode= 'lines+markers'
-            )
-
-    return {'data': [data],
-            'layout' : go.Layout(
-                title={'text': 'Vibration Analysis'},
-                xaxis=dict(range=[min(X),max(X)], title= '', gridcolor='#bdbdbd', gridwidth=1), 
-                yaxis=dict(range=[min(Y),max(Y)], title= 'Displacement', gridcolor='#bdbdbd', gridwidth=1)
-            )
-    }
-
-
-server = graph.server
-
-if __name__ == '__main__':
-    graph.run_server(debug=True)
-
-
-
 
 xaxis = xaxis[-1000:]
 yaxis = yaxis[-1000:]

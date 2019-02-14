@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Graph</title>
+	{% block scripts %}
+		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	{% endblock %}
+</head>
+<body>
+	
+	<p id="x-value">{{ xa }}</p>
+	<p id="y-value">{{ ya }}</p>
+	<div id="test" style="width: 600px;height: 300px"></div>
+	<script>
+		test = document.getElementById('test');
+		var x = document.getElementById("x-value").innerHTML;
+		var y = document.getElementById("y-value").innerHTML;
+
+		var regPat = /[0-9]/g;
+		x_str = x.match(regPat);
+		y_str = y.match(regPat);
+		console.log(x_str);
+		console.log(y_str);
+
+		Plotly.plot(test, [{
+			x: x_str,
+			y: y_str, 
+		}], {margin: {t: 0}})
+	</script>
+</body>
+</html>
