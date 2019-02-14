@@ -63,9 +63,9 @@ import json
 app = Flask(__name__)
 
 X = deque(maxlen=20)
-yaxis = [5]
-xaxis = [5]
-zaxis = [5]
+yaxis = []
+xaxis = []
+zaxis = []
 
 @app.route('/', methods=['POST', 'GET'])
 def pi():
@@ -84,17 +84,18 @@ def pi():
         # print ("y: ", yaxis)
         # print ("x: ", xaxis)
         # print ("z: ", zaxis)
-        return str(xaxis)
+        lst = str(xaxis) + str(yaxis)
+        return lst
 
 def append_list(dq_x):
     counter = 0
     for elem in dq_x:
         if counter == 0:
-            yaxis.append(dq_x[elem])
-        elif counter == 1:
-            xaxis.append(dq_x[elem])
-        elif counter == 2:
             zaxis.append(dq_x[elem])
+        elif counter == 1:
+            yaxis.append(dq_x[elem])
+        elif counter == 2:
+            xaxis.append(dq_x[elem])
         counter = counter + 1
     print ("element: ", type(elem))
 
