@@ -10,7 +10,7 @@ from collections import deque
 # Flask specific imports
 from flask import Flask, request, jsonify
 import json
-from flask import render_template
+from flask import render_template, url_for
 
 # Initialise Flask app
 app = Flask(__name__)
@@ -19,6 +19,8 @@ app = Flask(__name__)
 yaxis = []
 xaxis = []
 zaxis = []
+
+
 
 # Dash Graph's x, y axes
 X = deque(maxlen=20)
@@ -49,16 +51,20 @@ def pi(name=None):
         return render_template('index.html', xa=x_lst, ya=y_lst)
 
 def append_list(dq_x):
+    dq_ = json.loads(dq_x)
+    print(type(dq_))
     counter = 0
-    for elem in dq_x:
+    for key, value in dq_.items():
+        
         if counter == 0:
-            zaxis.append(dq_x[elem])
+            zaxis.append(value)
         elif counter == 1:
-            yaxis.append(dq_x[elem])
+            yaxis.append(value)
         elif counter == 2:
-            xaxis.append(dq_x[elem])
+            xaxis.append(value)
         counter = counter + 1
-    print ("element: ", type(elem))
+    print ("element: ", type(value))
+    print(xaxis)
 
 xaxis = xaxis[-1000:]
 yaxis = yaxis[-1000:]

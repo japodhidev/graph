@@ -4,7 +4,11 @@
 	<meta charset="UTF-8">
 	<title>Graph</title>
 	{% block scripts %}
-		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+		<script src="{{ url_for('static', filename='plotly-latest.min.js') }}"></script>
+	{% endblock %}
+
+	{% block stylesheets %}
+		<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 	{% endblock %}
 </head>
 <body>
