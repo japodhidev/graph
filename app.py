@@ -66,7 +66,7 @@ def append_list(dq_x):
         counter = counter + 1
     print ("element: ", type(value))
     print(xaxis)
-    if (len(xaxis) == 4 and len(yaxis) == 4):
+    if (len(xaxis) == 6 and len(yaxis) == 6):
         xaxis.pop(0)
         yaxis.pop(0)
 
