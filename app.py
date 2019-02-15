@@ -62,13 +62,17 @@ def append_list(dq_x):
             yaxis.append(value)
         elif counter == 2:
             xaxis.append(value)
+            
         counter = counter + 1
     print ("element: ", type(value))
     print(xaxis)
+    if (len(xaxis) == 4 and len(yaxis) == 4):
+        xaxis.pop(0)
+        yaxis.pop(0)
 
-xaxis = xaxis[-1000:]
-yaxis = yaxis[-1000:]
-zaxis = zaxis[-1000:]
+# xaxis = xaxis[:3]
+# yaxis = yaxis[:3]
+# zaxis = zaxis[:3]
 
 if __name__ == '__main__':
     app.run(debug=True)

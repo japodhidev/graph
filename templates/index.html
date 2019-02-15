@@ -3,6 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="refresh" content="5; URL=https://sheltered-coast-93272.herokuapp.com/">
+	<!-- <meta http-equiv="refresh" content="5; URL=http://127.0.0.1:8000/"> -->
+
 	<title>Graph</title>
 	{% block scripts %}
 		<script src="{{ url_for('static', filename='plotly-latest.min.js') }}"></script>
@@ -58,9 +60,18 @@
 		    }
 		  })
 		}
+		
+		// var clr = setInterval(clearArray(), 8000);
+		// function clearArray(){
+		// 	y_str.pop();
+		// 	x_str.pop();
+		// 	console.log("x after: " + x_str);
+		// 	console.log("y after: " + y_str);
+		// }
 	</script>
 
 	<script>
+
 		if ('serviceWorker' in navigator) {
 			window.addEventListener('load', function() {
 				navigator.serviceWorker.register('/sw.js').then(function(registration) {
