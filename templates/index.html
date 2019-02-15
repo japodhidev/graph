@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	 <meta http-equiv="refresh" content="5; URL=https://sheltered-coast-93272.herokuapp.com/>
 	<title>Graph</title>
 	{% block scripts %}
 		<script src="{{ url_for('static', filename='plotly-latest.min.js') }}"></script>
@@ -9,13 +10,22 @@
 
 	{% block stylesheets %}
 		<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+		<link rel="stylesheet" href="{{url_for('static', filename='bootstrap-4.3.1.min.css')}}">
 	{% endblock %}
 </head>
 <body>
 	
-	<p id="x-value">{{ xa }}</p>
-	<p id="y-value">{{ ya }}</p>
-	<div id="test" style="width: 600px;height: 300px"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col"></div>
+			<div class="col-auto">
+				<p id="x-value">{{ xa }}</p>
+				<p id="y-value">{{ ya }}</p>
+				<div id="test" style="width: 800px;height: 400px"></div>
+			</div>
+			<div class="col"></div>
+		</div>
+	</div>
 	<script>
 		test = document.getElementById('test');
 		var x = document.getElementById("x-value").innerHTML;
@@ -31,6 +41,22 @@
 			x: x_str,
 			y: y_str, 
 		}], {margin: {t: 0}})
+
+		function randomize() {
+		  Plotly.animate(test, {
+		    data: [{y: [Math.random(), Math.random(), Math.random()]}],
+		    traces: [0],
+		    layout: {}
+		  }, {
+		    transition: {
+		      duration: 500,
+		      easing: 'cubic-in-out'
+		    },
+		    frame: {
+		      duration: 500
+		    }
+		  })
+		}
 	</script>
 </body>
 </html>

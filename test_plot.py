@@ -3,12 +3,12 @@ import plotly.graph_objs as go
 import requests
 import json
 
-data = {'x': 3, 'y': 5, 'z': 7}
+data = {'x': 3, 'y': 4, 'z': 2}
 
 # for key, value in data.items():
 # 	print (key, value)
 js_dt = json.dumps(data)
-response = requests.post('http://127.0.0.1:8000/', 
+response = requests.post('http://127.0.0.1:8000', 
 	json=js_dt)
 if response.ok:
 	print(response.text)
