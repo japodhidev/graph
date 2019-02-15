@@ -3,7 +3,7 @@ import plotly.graph_objs as go
 import requests
 import json
 
-data = {'x': 0.46, 'y': 0.65, 'z': 0.8}
+data = {'x': 0.46, 'y': 0.25, 'z': 0.8}
 
 # for key, value in data.items():
 # 	print (key, value)
