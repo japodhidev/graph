@@ -30,10 +30,11 @@
 		test = document.getElementById('test');
 		var x = document.getElementById("x-value").innerHTML;
 		var y = document.getElementById("y-value").innerHTML;
-
-		var regPat = /[0-9]/g;
+		console.log(x)
+		var regPat = /[0-9][.][0-9]+/g;
 		x_str = x.match(regPat);
 		y_str = y.match(regPat);
+
 		console.log(x_str);
 		console.log(y_str);
 
@@ -56,6 +57,18 @@
 		      duration: 500
 		    }
 		  })
+		}
+	</script>
+
+	<script>
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', function() {
+				navigator.serviceWorker.register('/sw.js').then(function(registration) {
+					console.log('ServiceWorker registration successful with scope: ', registration.scope);
+				}, function(err) {
+					console.log('ServiceWorker registration failed: ', err);
+				})
+			})
 		}
 	</script>
 </body>
