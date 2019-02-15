@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="refresh" content="5; URL=https://sheltered-coast-93272.herokuapp.com/">
-	<!-- <meta http-equiv="refresh" content="5; URL=http://127.0.0.1:8000/"> -->
+	<!-- <meta http-equiv="refresh" content="5; URL=https://sheltered-coast-93272.herokuapp.com/"> -->
+	<meta http-equiv="refresh" content="5; URL=http://127.0.0.1:8000/">
 
 	<title>Graph</title>
 	{% block scripts %}
@@ -40,10 +40,57 @@
 		console.log(x_str);
 		console.log(y_str);
 
-		Plotly.plot(test, [{
-			x: x_str,
-			y: y_str, 
-		}], {margin: {t: 0}})
+
+		var plotTime = new Date();
+		var plotData = [{
+			x: [plotTime],
+			y: [y_str],
+			mode: 'lines',
+			line: {
+				color: '#80CAF6'
+			}
+		}]
+		var plotLayout = [{
+			yaxis: {
+				title: "y axis title"
+			},
+			xaxis: {
+				title: "x axis title"
+			}
+		}]
+
+		Plotly.newPlot(test, plotData, plotLayout);
+
+		var count = 0;
+
+		var plotInterval = setInterval(function(){
+			var nPTime = new Date();
+
+			var pltUpdate = {
+				x: [[nPTime]],
+				y: [[y_str]]
+			}
+
+			Plotly.extendTraces(test, pltUpdate, [0])
+
+			if(count === 1000) clearInterval(plotInterval);
+		}, 1500);
+
+		// Plotly.newPlot(test, [{
+		// 	x: x_str,
+		// 	y: , 
+		// }], {
+		// 	margin: {
+		// 		t: 0
+		// 	},
+		// 	yaxis: {
+		// 		tickformat: '%H:%M:%S',
+		// 		title: 'yaxis title'
+		// 	},
+		// 	xaxis: {
+		// 		title: 'xaxis title'
+		// 	}
+		// })
 
 		function randomize() {
 		  Plotly.animate(test, {
@@ -60,6 +107,23 @@
 		    }
 		  })
 		}
+
+		function sec2dt(v) {
+		  var MIN = 60
+		  var HOUR = 60 * 60
+		  
+		  var h = Math.floor(v / HOUR)
+		  var m =  Math.floor((v - (h * HOUR)) / MIN)
+		  var s = Math.floor(v - (h * HOUR) - (m * MIN))
+
+		  // you have to provide YYYY-MM-DD
+		  // for plotly to understand it as a date
+		  return `2017-01-01 ${h}:${pad(m)}:${pad(s)}`
+		}
+
+		function pad(v) {
+		  return v < 10 ? '0' + v : String(v)
+		}
 		
 		// var clr = setInterval(clearArray(), 8000);
 		// function clearArray(){
@@ -72,15 +136,15 @@
 
 	<script>
 
-		if ('serviceWorker' in navigator) {
-			window.addEventListener('load', function() {
-				navigator.serviceWorker.register('/sw.js').then(function(registration) {
-					console.log('ServiceWorker registration successful with scope: ', registration.scope);
-				}, function(err) {
-					console.log('ServiceWorker registration failed: ', err);
-				})
-			})
-		}
+		// if ('serviceWorker' in navigator) {
+		// 	window.addEventListener('load', function() {
+		// 		navigator.serviceWorker.register('/sw.js').then(function(registration) {
+		// 			console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		// 		}, function(err) {
+		// 			console.log('ServiceWorker registration failed: ', err);
+		// 		})
+		// 	})
+		// }
 	</script>
 </body>
 </html>
