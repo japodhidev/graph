@@ -67,14 +67,13 @@
 			var nPTime = new Date();
 
 			var pltUpdate = {
-				x: [[nPTime]],
-				y: [[y_str]]
+				x: [[nPTime]]
 			}
 
 			Plotly.extendTraces(test, pltUpdate, [0])
 
 			if(count === 1000) clearInterval(plotInterval);
-		}, 1500);
+		}, 10000);
 
 		// Plotly.newPlot(test, [{
 		// 	x: x_str,
