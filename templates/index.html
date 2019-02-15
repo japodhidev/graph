@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="refresh" content="5; URL=https://sheltered-coast-93272.herokuapp.com/">
+	<!-- <meta http-equiv="refresh" content="5; URL=https://sheltered-coast-93272.herokuapp.com/"> -->
 	<!-- <meta http-equiv="refresh" content="5; URL=http://127.0.0.1:8000/"> -->
 
 	<title>Graph</title>
@@ -37,14 +37,14 @@
 		x_str = x.match(regPat);
 		y_str = y.match(regPat);
 
-		console.log(x_str);
-		console.log(y_str);
+		console.log("x: " + x_str[0]);
+		console.log("y: " + y_str[0]);
 
-
+		y_a = y_str[0];
 		var plotTime = new Date();
 		var plotData = [{
 			x: [plotTime],
-			y: [y_str],
+			y: y_a,
 			mode: 'lines',
 			line: {
 				color: '#80CAF6'
@@ -67,17 +67,18 @@
 			var nPTime = new Date();
 
 			var pltUpdate = {
-				x: [[nPTime]]
+				x: [[nPTime]],
+				y: [[y_a]]
 			}
 
 			Plotly.extendTraces(test, pltUpdate, [0])
 
 			if(count === 1000) clearInterval(plotInterval);
-		}, 10000);
+		}, 1000);
 
 		// Plotly.newPlot(test, [{
 		// 	x: x_str,
-		// 	y: , 
+		// 	y: y_str, 
 		// }], {
 		// 	margin: {
 		// 		t: 0
@@ -91,46 +92,6 @@
 		// 	}
 		// })
 
-		function randomize() {
-		  Plotly.animate(test, {
-		    data: [{y: [Math.random(), Math.random(), Math.random()]}],
-		    traces: [0],
-		    layout: {}
-		  }, {
-		    transition: {
-		      duration: 500,
-		      easing: 'cubic-in-out'
-		    },
-		    frame: {
-		      duration: 500
-		    }
-		  })
-		}
-
-		function sec2dt(v) {
-		  var MIN = 60
-		  var HOUR = 60 * 60
-		  
-		  var h = Math.floor(v / HOUR)
-		  var m =  Math.floor((v - (h * HOUR)) / MIN)
-		  var s = Math.floor(v - (h * HOUR) - (m * MIN))
-
-		  // you have to provide YYYY-MM-DD
-		  // for plotly to understand it as a date
-		  return `2017-01-01 ${h}:${pad(m)}:${pad(s)}`
-		}
-
-		function pad(v) {
-		  return v < 10 ? '0' + v : String(v)
-		}
-		
-		// var clr = setInterval(clearArray(), 8000);
-		// function clearArray(){
-		// 	y_str.pop();
-		// 	x_str.pop();
-		// 	console.log("x after: " + x_str);
-		// 	console.log("y after: " + y_str);
-		// }
 	</script>
 
 	<script>
