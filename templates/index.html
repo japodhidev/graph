@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="refresh" content="5; URL=https://sheltered-coast-93272.herokuapp.com/">
+	<!-- <meta http-equiv="refresh" content="5; URL=https://sheltered-coast-93272.herokuapp.com/"> -->
 	<!-- <meta http-equiv="refresh" content="5; URL=http://127.0.0.1:8000/"> -->
 
 	<title>Graph</title>
@@ -38,60 +38,60 @@
 		y_str = y.match(regPat);
 
 		console.log("x: " + x_str[0]);
-		console.log("y: " + typeof(y_str));
+		y_ = Array.prototype.slice.call(y_str, 1);
+		console.log("y: " + y_);
 
 		y_a = y_str[0];
-		// var plotTime = new Date();
-		// var plotData = [{
-		// 	x: [plotTime],
-		// 	y: y_a,
-		// 	mode: 'markers',
-		// 	line: {
-		// 		color: '#80CAF6'
-		// 	}
-		// }]
-		// var plotLayout = {
-		// 	title: "Graph Data Visualisation",
-		// 	yaxis: {
-		// 		title: "y axis title"
-		// 	},
-		// 	xaxis: {
-		// 		title: "x axis title"
-		// 	}
-		// };
-
-		// Plotly.newPlot(test, plotData, plotLayout);
-
-		// var count = 0;
-
-		// var plotInterval = setInterval(function(){
-		// 	var nPTime = new Date();
-
-		// 	var pltUpdate = {
-		// 		x: [[nPTime]],
-		// 		y: [[y_str]]
-		// 	}
-
-		// 	Plotly.extendTraces(test, pltUpdate, [0])
-
-		// 	if(count === 1000) clearInterval(plotInterval);
-		// }, 3000);
-
-		Plotly.newPlot(test, [{
-			x: x_str,
-			y: y_str, 
-		}], {
-			margin: {
-				t: 0
-			},
+		var plotTime = new Date();
+		var plotData = [{
+			x: [plotTime],
+			y: y_a,
+			mode: 'markers',
+			line: {
+				color: '#80CAF6'
+			}
+		}]
+		var plotLayout = {
+			title: "Graph Data Visualisation",
 			yaxis: {
-				tickformat: '%H:%M:%S',
-				title: 'yaxis title'
+				title: "y axis title"
 			},
 			xaxis: {
-				title: 'xaxis title'
+				title: "x axis title"
 			}
-		})
+		};
+
+		Plotly.newPlot(test, plotData, plotLayout);
+
+		var count = 0;
+
+		var plotInterval = setInterval(function(){
+			var nPTime = new Date();
+
+			var pltUpdate = {
+				x: [[nPTime]]
+			}
+
+			Plotly.extendTraces(test, pltUpdate, [0])
+
+			if(count === 1000) clearInterval(plotInterval);
+		}, 3000);
+
+		// Plotly.newPlot(test, [{
+		// 	x: x_str,
+		// 	y: y_str, 
+		// }], {
+		// 	margin: {
+		// 		t: 0
+		// 	},
+		// 	yaxis: {
+		// 		tickformat: '%H:%M:%S',
+		// 		title: 'yaxis title'
+		// 	},
+		// 	xaxis: {
+		// 		title: 'xaxis title'
+		// 	}
+		// })
 
 	</script>
 
