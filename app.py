@@ -51,8 +51,8 @@ def pi(name=None):
         return render_template('index.html', xa=x_lst, ya=y_lst)
 
 def append_list(dq_x):
-    dq_ = dict(json.loads(dq_x))
-    print(type(dq_))
+    # print(type(dq_x))
+    dq_ = json.loads(dq_x)
     counter = 0
     for key, value in dq_.items():
         
