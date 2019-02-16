@@ -68,7 +68,7 @@
         var plotTime = new Date();
         var plotData = [{
             x: [plotTime],
-            y: [y_str[0], y_str[max]],
+            y: [y_str[0], y_str[1], y_str[2], y_str[3], y_str[4]],
             mode: 'lines+markers',
             line: {
                 color: '#80CAF6'
@@ -125,8 +125,8 @@
             url: "https://sheltered-coast-93272.herokuapp.com/"
         });
         request.done(function(msg) {
-            console.log(msg);
-//            $("#success-alert").html(msg);
+            //console.log(msg);
+            //$("#success-alert").html(msg);
         })
 
         request.fail(function(jqXHR, textStatus) {
