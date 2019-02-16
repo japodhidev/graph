@@ -70,7 +70,7 @@
         var plotTime = new Date();
         var plotData = [{
             x: [plotTime],
-            y: [y_array[0], y_array[1]],
+            y: [y_str[0], y_str[1], y_str[2], y_str[3], y_str[4]],
             mode: 'lines+markers',
             line: {
                 color: '#80CAF6'
@@ -120,22 +120,30 @@
         // 		title: 'xaxis title'
         // 	}
         // })
+        
+        function getArray() {
+            var request = $.ajax({
+                url: "https://sheltered-coast-93272.herokuapp.com/api/xaxis"
+            });
+            request.done(function(msg) {
+                console.log("res: " + msg);
+                //$("#success-alert").html(msg);
+            })
+
+            request.fail(function(jqXHR, textStatus) {
+                $("#error-alert").html("Request failed: " + textStatus);
+            });
+        }
+        
+        function populateAxes(y_array) {
+            for (var i = 0; i <= y_str.length; i++) {
+                y_array.push(y_str[0]);
+            }
+            return y_array;
+        }
 
     </script>
-    <script>
-        var request = $.ajax({
-            url: "https://sheltered-coast-93272.herokuapp.com/api/xaxis"
-        });
-        request.done(function(msg) {
-            console.log("res: " + msg);
-            //$("#success-alert").html(msg);
-        })
 
-        request.fail(function(jqXHR, textStatus) {
-            $("#error-alert").html("Request failed: " + textStatus);
-        });
-
-    </script>
 </body>
 
 </html>
