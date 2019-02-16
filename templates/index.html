@@ -60,13 +60,15 @@
         for (var i = 0; i <= y_str.length; i++) {
             y_array.push(y_str[0]);
         }
+        
+        var max = y_array.length - 1;
 
         console.log(y_array);
 
         var plotTime = new Date();
         var plotData = [{
             x: [plotTime],
-            y: [y_array],
+            y: [y_str[0], y_str[max]],
             mode: 'lines+markers',
             line: {
                 color: '#80CAF6'
@@ -123,7 +125,7 @@
             url: "https://sheltered-coast-93272.herokuapp.com/"
         });
         request.done(function(msg) {
-            console.log(typeof(msg));
+            console.log(msg);
 //            $("#success-alert").html(msg);
         })
 
