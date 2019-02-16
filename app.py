@@ -102,8 +102,8 @@ def append_list(dq_x):
         xaxis.pop(0)
         yaxis.pop(0)
     if (len(xaxis) == 8):
-        xaxis = xaxis[]
-        yaxis = yaxis[]
+        xaxis.clear()
+        yaxis.clear()
 
 # xaxis = xaxis[:3]
 # yaxis = yaxis[:3]
