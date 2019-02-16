@@ -1,129 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="refresh" content="10; URL=https://sheltered-coast-93272.herokuapp.com/">
-	<!-- <meta http-equiv="refresh" content="5; URL=http://127.0.0.1:8000/"> -->
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="10; URL=https://sheltered-coast-93272.herokuapp.com/">
+    <!-- <meta http-equiv="refresh" content="5; URL=http://127.0.0.1:8000/"> -->
 
-	<title>Graph</title>
-	{% block scripts %}
-		<!-- <script src="{{ url_for('static', filename='plotly-latest.min.js') }}"></script> -->
-		<script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
-	{% endblock %}
+    <title>Graph</title>
+    {% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- <script src="{{ url_for('static', filename='plotly-latest.min.js') }}"></script> -->
+    <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
+    {% endblock %}
 
-	{% block stylesheets %}
-		<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
-		<link rel="stylesheet" href="{{url_for('static', filename='bootstrap-4.3.1.min.css')}}">
-	{% endblock %}
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap-4.3.1.min.css')}}">
+    {% endblock %}
 </head>
+
 <body>
-	
-	<div class="container">
-		<div class="row">
-			<div class="col"></div>
-			<div class="col-auto">
-				<p id="x-value">{{ xa }}</p>
-				<p id="y-value">{{ ya }}</p>
-				<div id="test" style="width: 800px;height: 400px"></div>
-			</div>
-			<div class="col"></div>
-		</div>
-	</div>
-	<div class="container">
-	    <div class="row">
-	        <div class="data-wrapper">
+
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-auto">
+                <p id="x-value">{{ xa }}</p>
+                <p id="y-value">{{ ya }}</p>
+                <div id="test" style="width: 800px;height: 400px"></div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="data-wrapper">
                 <div id="success-alert" class="alert alert-success"></div>
                 <div class="alert alert-danger"></div>
             </div>
-	    </div>
-	</div>
-	<script>
-		test = document.getElementById('test');
-		var x = document.getElementById("x-value").innerHTML;
-		var y = document.getElementById("y-value").innerHTML;
-		console.log(x)
-		var regPat = /[0-9][.][0-9]+/g;
-		x_str = x.match(regPat);
-		y_str = y.match(regPat);
+        </div>
+    </div>
+    <script>
+        test = document.getElementById('test');
+        var x = document.getElementById("x-value").innerHTML;
+        var y = document.getElementById("y-value").innerHTML;
+        console.log(x)
+        var regPat = /[0-9][.][0-9]+/g;
+        x_str = x.match(regPat);
+        y_str = y.match(regPat);
 
-		console.log("x: " + x_str[0]);
-		console.log("y: " + y_str[0]);
-		console.log(y_str.length);
-		y_array = [];
+        console.log("x: " + x_str[0]);
+        console.log("y: " + y_str[0]);
+        console.log(y_str.length);
+        y_array = [];
 
-		// if (y_array.length != 0) {
-			
-		// }
-		for (var i = 0; i <= y_str.length; i++) {
-			y_array.push(y_str[0]);
-		}
-		
-		console.log(y_array);
+        // if (y_array.length != 0) {
 
-		var plotTime = new Date();
-		var plotData = [{
-			x: [plotTime],
-			y: [y_str[0], y_str[1]],
-			mode: 'lines+markers',
-			line: {
-				color: '#80CAF6'
-			}
-		}]
-		var plotLayout = {
-			title: "Graph Data Visualisation",
-			yaxis: {
-				title: "y axis title"
-			},
-			xaxis: {
-				title: "x axis title"
-			}
-		};
+        // }
+        for (var i = 0; i <= y_str.length; i++) {
+            y_array.push(y_str[0]);
+        }
 
-		Plotly.newPlot(test, plotData, plotLayout);
+        console.log(y_array);
 
-		var count = 0;
+        var plotTime = new Date();
+        var plotData = [{
+            x: [plotTime],
+            y: [y_str[0], y_str[1]],
+            mode: 'lines+markers',
+            line: {
+                color: '#80CAF6'
+            }
+        }]
+        var plotLayout = {
+            title: "Graph Data Visualisation",
+            yaxis: {
+                title: "y axis title"
+            },
+            xaxis: {
+                title: "x axis title"
+            }
+        };
 
-		var plotInterval = setInterval(function(){
-			var plotTime = new Date();
+        Plotly.newPlot(test, plotData, plotLayout);
 
-			var pltUpdate = {
-				x: [[plotTime]],
-				y: [y_array]
-			}
+        var count = 0;
 
-			Plotly.extendTraces(test, pltUpdate, [0])
+        var plotInterval = setInterval(function() {
+            var plotTime = new Date();
 
-			if(count === 1000) clearInterval(plotInterval);
-		}, 1000);
+            var pltUpdate = {
+                x: [
+                    [plotTime]
+                ],
+                y: [y_array]
+            }
 
-		// Plotly.newPlot(test, [{
-		// 	x: x_str,
-		// 	y: y_str, 
-		// }], {
-		// 	margin: {
-		// 		t: 0
-		// 	},
-		// 	yaxis: {
-		// 		tickformat: '%H:%M:%S',
-		// 		title: 'yaxis title'
-		// 	},
-		// 	xaxis: {
-		// 		title: 'xaxis title'
-		// 	}
-		// })
+            Plotly.extendTraces(test, pltUpdate, [0])
 
-	</script>
+            if (count === 1000) clearInterval(plotInterval);
+        }, 1000);
+
+        // Plotly.newPlot(test, [{
+        // 	x: x_str,
+        // 	y: y_str, 
+        // }], {
+        // 	margin: {
+        // 		t: 0
+        // 	},
+        // 	yaxis: {
+        // 		tickformat: '%H:%M:%S',
+        // 		title: 'yaxis title'
+        // 	},
+        // 	xaxis: {
+        // 		title: 'xaxis title'
+        // 	}
+        // })
+
+    </script>
     <script>
         var request = $.ajax({
             url: "https://sheltered-coast-93272.herokuapp.com/"
         });
-        request.done(function(msg){
+        request.done(function(msg) {
             $("#success-alert").html(msg);
         })
-        
+
         request.fail(function(jqXHR, textStatus) {
-           $("#error-alert").html("Request failed: " + textStatus); 
+            $("#error-alert").html("Request failed: " + textStatus);
         });
+
     </script>
 </body>
+
 </html>
