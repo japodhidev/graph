@@ -123,7 +123,9 @@
         
         function getArray() {
             var request = $.ajax({
-                url: "https://sheltered-coast-93272.herokuapp.com/api/"
+                url: "https://sheltered-coast-93272.herokuapp.com/api/",
+                dataType: "json",
+                method: "POST"
             });
             request.done(function(msg) {
                 console.log("res: " + msg);
