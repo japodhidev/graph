@@ -58,12 +58,6 @@ def rasp(name=None):
     # Return a json response
     return jsonify(pi_data)
 
-@app.route('/api')
-def rasp_homepage(name=None):
-    # Typecast to string and send the values alongside the template
-    x_lst = str(xaxis)
-    y_lst = str(yaxis)
-    return render_template('index.html', xa=x_list, ya=y_lst)
 
 @app.route('/api/xaxis', methods=['POST'])
 def x_axis(name=None):
