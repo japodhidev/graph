@@ -43,6 +43,7 @@
     <script>
         // Global variables
         y_array = [];
+        test_array = [];
         test = document.getElementById('test');
         var x = document.getElementById("x-value").innerHTML;
         var y = document.getElementById("y-value").innerHTML;
@@ -57,13 +58,10 @@
 
 
 
-        // if (y_array.length != 0) {
-
-        // }
         for (var i = 0; i <= y_str.length; i++) {
             y_array.push(y_str[0]);
         }
-        
+
         var max = y_array.length - 1;
 
         console.log("y_array: " + y_array);
@@ -96,6 +94,7 @@
         var plotInterval = setInterval(function() {
             var plotTime = new Date();
 
+            // fetch and add y_array on every tick
             var pltUpdate = {
                 x: [
                     [plotTime]
@@ -107,8 +106,8 @@
 
             if (count === 1000) clearInterval(plotInterval);
         }, 1000);
-        
-        var fetchDt = setInterval(function(){
+
+        var fetchDt = setInterval(function() {
             getArray();
         }, 3000);
 
@@ -128,7 +127,7 @@
         // 		title: 'xaxis title'
         // 	}
         // })
-        
+
         function getArray() {
             var request = $.ajax({
                 url: "https://sheltered-coast-93272.herokuapp.com/api/xaxis",
@@ -136,15 +135,17 @@
                 method: "POST"
             });
             request.done(function(msg) {
-                console.log("res: " + typeof(msg));
+                console.log("res: " + msg);
                 $("#success-alert").html(msg);
+                populateAxes(msg);
+                console.log("array: " + y_array);
             })
 
             request.fail(function(jqXHR, textStatus) {
                 $("#error-alert").html("Request failed: " + textStatus);
             });
         }
-        
+
         function populateAxes(y_arr) {
             for (var i = 0; i <= y_str.length; i++) {
                 y_array.push(y_arr[i]);
