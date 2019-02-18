@@ -135,6 +135,7 @@
                 method: "POST"
             });
             request.done(function(msg) {
+                $("#y-value").html(msg);
                 console.log("res: " + msg);
                 $("#success-alert").html(msg);
                 // populateAxes(msg);
