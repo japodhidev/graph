@@ -74,7 +74,7 @@ def y_axis(name=None):
     return yax
     
 def append_list(dq_x):
-    # print(type(dq_x))
+    print("data: ", dq_x)
     # Load data sent through the request
     dq_ = json.loads(dq_x)
     # Loop counter for iterating through the values sent
