@@ -57,16 +57,8 @@
         console.log(y_str.length);
 
 
-
-        for (var i = 0; i <= y_str.length; i++) {
-            y_array.push(y_str[0]);
-        }
-
         var max = y_array.length - 1;
 
-        console.log("y_array: " + y_array);
-        console.log("y_array length: " + y_array.length);
-        console.log("max: " + max);
 
         var plotTime = new Date();
         var plotData = [{
@@ -105,12 +97,11 @@
             Plotly.extendTraces(test, pltUpdate, [0])
 
             if (count === 1000) clearInterval(plotInterval);
-        }, 3000);
+        }, 2000);
 
         var fetchDt = setInterval(function() {
             fetch();
-            y_array.length = 0;
-        }, 2000);
+        }, 1000);
         
 
         // Plotly.newPlot(test, [{
@@ -157,18 +148,25 @@
             y_str = y.match(regPat);
             
             for (var j = 0; j <= y_str.length; j++) {
-                y_array.push(y_str[j]);
+                if (y_array == 0){
+                    y_array.push(y_str[j]);
+                } else {
+                    y_array = [];
+                }
+                
             }
             console.log("array: " + y_array);
+            return y_array;
         }
         
         function populateAxis(dt) {
             console.log("test: " + test_array.length);
-            if (test_array.length == 4) {
-                test_array = [];
+            if (test_array.length == 0) {
                 for (var i =0; i <= dt.length; i++) {
                     test_array.push(dt[i]);
                 }
+            } else {
+                test_array.length = 0;
             }
             console.log("populated: " + test_array);      
         }
