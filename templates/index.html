@@ -91,7 +91,7 @@
                 x: [
                     [plotTime]
                 ],
-                y: [y_array]
+                y: [y_array].map(readYValues)
             }
 
             Plotly.extendTraces(test, pltUpdate, [0])
