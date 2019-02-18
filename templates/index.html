@@ -193,7 +193,8 @@
         
         
         function fetchAxis(axis) {
-            var request = $.ajax({
+            console.log("axis: " + axis);
+            var req = $.ajax({
                 url: "https://sheltered-coast-93272.herokuapp.com/api/axis",
                 dataType: "json",
                 method: "POST",
@@ -202,12 +203,12 @@
                 },
             });
             
-            request.done(function(msg){
+            req.done(function(msg){
                 console.log("x-axis: " + msg);
                 populateAxis(msg, y_array);
             });
             
-            request.fail(function(jqXHR, textStatus){
+            req.fail(function(jqXHR, textStatus){
                 $("#error-alert").html("Request failed: " + textStatus);
             });
         }
