@@ -162,10 +162,11 @@
         }
         
         function populateAxis(dt) {
-            for (var i = 0; i <= dt.length; i++) {
-                if (test_array.length == 4) {
-                    test_array = [];
-                } else {
+        
+            if (test_array.length == 4) {
+                test_array = [];
+            } else {
+                for (var i =0; i <= dt.length; i++) {
                     test_array.push(dt[i]);
                 }
             }
