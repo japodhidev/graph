@@ -59,7 +59,7 @@
 
         var max = y_array.length - 1;
 
-        var y_axis = populateAxis();
+        var y_axis = populateAxis(y_str);
         
         var plotTime = new Date();
         var plotData = [{
@@ -73,7 +73,8 @@
         var plotLayout = {
             title: "Graph Data Visualisation - Displacement Against Time",
             yaxis: {
-                title: "Displacement"
+                title: "Displacement",
+                range: [-3, 3],
             },
             xaxis: {
                 title: "Time"
