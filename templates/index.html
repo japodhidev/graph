@@ -56,15 +56,11 @@
         console.log("y: " + y_str[0]);
         console.log(y_str.length);
 
-
-        var max = y_array.length - 1;
-
-        var y_axis = readYValues();
         
         var plotTime = new Date();
         var plotData = [{
             x: [plotTime],
-            y: [y_axis[0], y_axis[1], y_axis[2], y_axis[3]],
+            y: [y_str[0], y_str[1]],
             mode: 'lines+markers',
             line: {
                 color: '#80CAF6'
