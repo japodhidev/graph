@@ -71,6 +71,7 @@
             yaxis: {
                 title: "Displacement",
                 range: [-2, 2],
+                dtick: 0.10,
             },
             xaxis: {
                 title: "Time"
@@ -82,7 +83,7 @@
         var count = 0;
 
         var plotInterval = setInterval(function() {
-//            fetch();
+            fetch();
             var plotTime = new Date();
 
             // fetch and add y_array on every tick
@@ -98,10 +99,10 @@
             if (count === 1000) clearInterval(plotInterval);
         }, 1000);
 
-        var fetchDt = setInterval(function() {
-            fetch();
-        }, 300);
-        
+//        var fetchDt = setInterval(function() {
+//            fetch();
+//        }, 300);
+//        
 
         // Plotly.newPlot(test, [{
         // 	x: x_str,
