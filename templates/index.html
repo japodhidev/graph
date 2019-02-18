@@ -108,9 +108,12 @@
         }, 1000);
 
         var fetchDt = setInterval(function() {
-            getArray();
+            fetch();
+        }, 2000);
+        
+        var populate = setInterval(function(){
+            readYValues();
         }, 3000);
-
 
         // Plotly.newPlot(test, [{
         // 	x: x_str,
@@ -127,8 +130,9 @@
         // 		title: 'xaxis title'
         // 	}
         // })
-
-        function getArray() {
+        
+        // Ajax call to endpoint, append values to HTML element
+        function fetch() {
             var request = $.ajax({
                 url: "https://sheltered-coast-93272.herokuapp.com/api/xaxis",
                 dataType: "json",
@@ -138,21 +142,23 @@
                 $("#y-value").html(msg);
                 console.log("res: " + msg);
                 $("#success-alert").html(msg);
-                // populateAxes(msg);
-                // console.log("array: " + test_array);
+                
             })
 
             request.fail(function(jqXHR, textStatus) {
                 $("#error-alert").html("Request failed: " + textStatus);
             });
         }
-
-        function populateAxes(y_arr) {
-            console.log("object length: " + y_arr.length);
-            for (var i = 0; i <= y_arr.length; i++) {
-                test_array.splice(0, 4, y_arr[i]);
-                // test_array.push(y_arr[i]);
-            }
+        
+        // Read the elements of the y-axis div, populate y_array
+        function readYValues(){
+            var y = document.getElementById("y-value").innerHTML;
+            var regPat = /[0-9][.][0-9]+/g;
+            y_str = y.match(regPat);
+            
+            for (var j = 0; j <= y_str.length; j++) {
+                y_array.push(y_str[j]);
+            }   
         }
 
     </script>
