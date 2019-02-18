@@ -77,7 +77,7 @@ def y_axis(name=None):
 @app.route('/api/axis', methods=['POST', 'GET'])
 def axis(name=None):
     if request.method == 'POST':
-        axis_ = request.json;
+        axis_ = request.data;
         print ("axis: ", axis_)
         
         if (str(axis_) == 'x'):
