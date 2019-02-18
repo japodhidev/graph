@@ -74,7 +74,7 @@ def y_axis(name=None):
     
     return yax
 
-@app.route('/api/axis', methods=['POST'])
+@app.route('/api/axis', methods=['POST', 'GET'])
 def axis(name=None):
     if request.method == 'POST':
         axis_ = request.json;
@@ -85,8 +85,8 @@ def axis(name=None):
             return jsonify(yaxis)
         
     if request.method == 'GET':
-        get_msg = {"message" : "method not allowed"}
-        return jsonify(get_msg)
+        get_msg = "method not allowed"
+        return render_template('error.html', msg=get_msg)
 
 def append_list(dq_x):
     print("data: ", dq_x)
