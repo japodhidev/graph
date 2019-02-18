@@ -137,7 +137,7 @@
                 method: "POST"
             });
             request.done(function(msg) {
-                $("#y-value").html(msg);
+                $("#y-value").html("[", msg.slice(0, 4), "]");
                 console.log("res: " + msg);
                 $("#success-alert").html(msg);
                 
