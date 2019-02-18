@@ -193,8 +193,8 @@
         
         
         function fetchAxis(axis) {
-            console.log("ax: " + axis);
-            console.log("ax: " + axis.toString());
+//            console.log("ax: " + typeof(axis));
+            console.log("ax: " + typeof(axis.toString()));
             var req = $.ajax({
                 url: "https://sheltered-coast-93272.herokuapp.com/api/axis",
                 dataType: "json",

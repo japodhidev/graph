@@ -9,8 +9,8 @@ data = {'x': 0.46, 'y': 0.47, 'z': 0.5}
 # 	print (key, value)
 js_dt = json.dumps(data)
 axis = 'x'
-response = requests.post('http://127.0.0.1:8000/api/axis', 
-	json=axis)
+response = requests.post('http://127.0.0.1:8000', 
+	json=js_dt)
 #print ("js_dt: ", js_dt)
 #print ("data: ", type(data))
 if response.ok:
