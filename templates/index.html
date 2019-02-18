@@ -116,6 +116,7 @@
 
         var plotInterval = setInterval(function() {
             fetch();
+            fetchAxis(x);
             var plotTime = new Date();
 
             // fetch and add y_array on every tick
@@ -190,6 +191,25 @@
             });
         }
         
+        
+        function fetchAxis(axis) {
+            var request = $.ajax({
+                url: "https://sheltered-coast-93272.herokuapp.com/api/axis",
+                method: "POST",
+                data: {
+                    axis: axis
+                },
+                dataType: "json"
+            });
+            
+            request.done(function(msg){
+                console.log("x-axis: " + msg);
+            });
+            
+            request.fail(function(){
+                $("#error-alert").html("Request failed: " + textStatus);
+            });
+        }
         // Read the elements of the y-axis div, populate y_array
         function readYValues(){
             var y = document.getElementById("y-value").innerHTML;
