@@ -83,11 +83,11 @@ def append_list(dq_x):
     # Populate the values into coordinates
     for key, value in dq_.items():
         if counter == 0:
-            zaxis.append(value)
+            xaxis.append(value)
         elif counter == 1:
             yaxis.append(value)
         elif counter == 2:
-            xaxis.append(value)
+            zaxis.append(value)
             
         counter = counter + 1
     print ("element: ", type(value))
