@@ -137,9 +137,11 @@
                 method: "POST"
             });
             request.done(function(msg) {
-                $("#y-value").html("[", msg.slice(0, 4), "]");
+                $("#y-value").html("[" + msg.slice(0, 4) + "]");
                 console.log("res: " + msg);
+                console.log("res length: " + msg.length);
                 $("#success-alert").html(msg);
+                populateAxis(msg);
                 
             })
 
@@ -158,6 +160,17 @@
                 y_array.push(y_str[j]);
             }
             console.log("array: " + y_array);
+        }
+        
+        function populateAxis(dt) {
+            for (var i = 0; i <= dt.length; i++) {
+                if (test_array.length == 4) {
+                    test_array = [];
+                } else {
+                    test_array.push(dt[j]);
+                }
+            }
+            console.log("populated: " + test_array);      
         }
 
     </script>
