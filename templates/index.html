@@ -109,7 +109,6 @@
 
         var fetchDt = setInterval(function() {
             fetch();
-            readYValues();
         }, 2000);
         
 
@@ -167,7 +166,7 @@
                 if (test_array.length == 4) {
                     test_array = [];
                 } else {
-                    test_array.push(dt[j]);
+                    test_array.push(dt[i]);
                 }
             }
             console.log("populated: " + test_array);      
