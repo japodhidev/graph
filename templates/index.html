@@ -109,6 +109,7 @@
 
         var fetchDt = setInterval(function() {
             fetch();
+            y_array.length = 0;
         }, 2000);
         
 
@@ -162,10 +163,9 @@
         }
         
         function populateAxis(dt) {
-        
+            console.log("test: " + test_array.length);
             if (test_array.length == 4) {
                 test_array = [];
-            } else {
                 for (var i =0; i <= dt.length; i++) {
                     test_array.push(dt[i]);
                 }
