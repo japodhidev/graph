@@ -182,7 +182,7 @@
                 console.log("res: " + msg);
                 console.log("res length: " + msg.length);
                 $("#success-alert").html(msg);
-                populateAxis(msg);
+                populateAxis(msg, x_array);
                 
             })
 
@@ -204,6 +204,7 @@
             
             request.done(function(msg){
                 console.log("x-axis: " + msg);
+                populateAxis(msg, y_array);
             });
             
             request.fail(function(jqXHR, textStatus){
@@ -211,36 +212,36 @@
             });
         }
         // Read the elements of the y-axis div, populate y_array
-        function readYValues(){
-            var y = document.getElementById("y-value").innerHTML;
-            var regPat = /[0-9][.][0-9]+/g;
-            y_str = y.match(regPat);
-            
-            for (var j = 0; j <= y_str.length; j++) {
-                if (y_array.length == 0){
-                    y_array.push(y_str[j]);
-                } else {
-                    y_array = [];
-                }
-                
-            }
-            console.log("array: " + y_array);
-            return y_array;
-        }
+//        function readYValues(){
+//            var y = document.getElementById("y-value").innerHTML;
+//            var regPat = /[0-9][.][0-9]+/g;
+//            y_str = y.match(regPat);
+//            
+//            for (var j = 0; j <= y_str.length; j++) {
+//                if (y_array.length == 0){
+//                    y_array.push(y_str[j]);
+//                } else {
+//                    y_array = [];
+//                }
+//                
+//            }
+//            console.log("array: " + y_array);
+//            return y_array;
+//        }
         
-        function populateAxis(dt) {
-            console.log("test: " + x_array.length);
-            if (x_array.length == 0) {
+        function populateAxis(dt, a_array) {
+            console.log("test: " + a_array.length);
+            if (a_array.length == 0) {
                 for (var i =0; i <= dt.length; i++) {
-                    x_array.push(dt[i]);
+                    a_array.push(dt[i]);
                 }
             } else {
                 // test_array.length = 0;
                 for (var k = 0; k < dt.length; k++) {
-                    x_array.splice(k, dt.length, dt[k]);
+                    a_array.splice(k, dt.length, dt[k]);
                 }
             }
-            console.log("populated: " + x_array);      
+            console.log("populated: " + a_array);      
         }
 
     </script>
