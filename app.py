@@ -83,10 +83,11 @@ def axis(name=None):
             return jsonify(xaxis)
         elif (str(axis_) == 'y'):
             return jsonify(yaxis)
-    else:
+        
+    if request.method == 'GET':
         get_msg = {"message" : "method not allowed"}
         return jsonify(get_msg)
-    
+
 def append_list(dq_x):
     print("data: ", dq_x)
     # Load data sent through the request
