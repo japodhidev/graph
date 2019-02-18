@@ -61,6 +61,7 @@ def rasp(name=None):
 
 @app.route('/api/xaxis', methods=['POST'])
 def x_axis(name=None):
+    xaxis = []
     # Return y-axis values as a json response
     xax = jsonify(xaxis)
     
