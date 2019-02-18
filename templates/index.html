@@ -43,7 +43,7 @@
     <script>
         // Global variables
         y_array = [];
-        test_array = [];
+        x_array = [];
         test = document.getElementById('test');
         var x = document.getElementById("x-value").innerHTML;
         var y = document.getElementById("y-value").innerHTML;
@@ -60,7 +60,7 @@
         var plotTime = new Date();
         var plotData = [{
             x: [plotTime],
-            y: [y_str[0], y_str[1], y_str[2], y_str[3]],
+            y: [x_str[0], x_str[1], x_str[2], x_str[3]],
             mode: 'lines+markers',
             line: {
                 color: '#80CAF6'
@@ -90,7 +90,7 @@
                 x: [
                     [plotTime]
                 ],
-                y: [test_array]
+                y: [x_array]
             }
 
             Plotly.extendTraces(test, pltUpdate, [0])
@@ -122,12 +122,12 @@
         // Ajax call to endpoint, append values to HTML element
         function fetch() {
             var request = $.ajax({
-                url: "https://sheltered-coast-93272.herokuapp.com/api/yaxis",
+                url: "https://sheltered-coast-93272.herokuapp.com/api/xaxis",
                 dataType: "json",
                 method: "POST"
             });
             request.done(function(msg) {
-                $("#y-value").html("[" + msg.slice(0, 4) + "]");
+                $("#x-value").html("[" + msg.slice(0, 4) + "]");
                 console.log("res: " + msg);
                 console.log("res length: " + msg.length);
                 $("#success-alert").html(msg);
@@ -159,18 +159,18 @@
         }
         
         function populateAxis(dt) {
-            console.log("test: " + test_array.length);
-            if (test_array.length == 0) {
+            console.log("test: " + x_array.length);
+            if (x_array.length == 0) {
                 for (var i =0; i <= dt.length; i++) {
-                    test_array.push(dt[i]);
+                    x_array.push(dt[i]);
                 }
             } else {
                 // test_array.length = 0;
                 for (var k = 0; k < dt.length; k++) {
-                    test_array.splice(k, dt.length, dt[k]);
+                    x_array.splice(k, dt.length, dt[k]);
                 }
             }
-            console.log("populated: " + test_array);      
+            console.log("populated: " + x_array);      
         }
 
     </script>

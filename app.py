@@ -90,7 +90,7 @@ def append_list(dq_x):
             
         counter = counter + 1
     print ("element: ", type(value))
-    print(yaxis)
+    print("x: ", xaxis)
     # Limit the length list to 10 elements long
     if (len(xaxis) == 4):
         xaxis.pop(0)
