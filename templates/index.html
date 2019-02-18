@@ -132,7 +132,8 @@
         }, 1000);
         
         var plotIntervalY = setInterval(function() {
-            fetchAxis(y);
+            var axis = "y";
+            fetchAxis(axis);
             var plotTime = new Date();
 
             // fetch and add y_array on every tick
@@ -197,7 +198,7 @@
                 dataType: "json",
                 method: "POST",
                 data: {
-                    axis: axis
+                    a: axis
                 },
             });
             
