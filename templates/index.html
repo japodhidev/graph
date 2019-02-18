@@ -165,7 +165,10 @@
                     test_array.push(dt[i]);
                 }
             } else {
-                test_array.length = 0;
+                // test_array.length = 0;
+                for (var k = 0; k < dt.length; k++) {
+                    test_array.splice(0, dt.length, dt[k]);
+                }
             }
             console.log("populated: " + test_array);      
         }
