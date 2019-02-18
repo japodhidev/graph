@@ -10,7 +10,7 @@ from collections import deque
 # Flask specific imports
 from flask import Flask, request, jsonify
 import json
-from flask import render_template, url_for
+from flask import render_template, url_for, Response
 
 # Initialise Flask app
 app = Flask(__name__)
@@ -77,19 +77,26 @@ def y_axis(name=None):
 @app.route('/api/axis', methods=['POST', 'GET'])
 def axis(name=None):
     if request.method == 'POST':
+        res = ''
+        x = "x"
+        y = "y"
         axis_ = request.data;
         print ("axis: ", axis_)
+        print ("decoded:",axis_.decode("utf-8"))
+        axis_str = axis_.decode("utf-8")
+#        print (len(axis_str))
         
-        if (str(axis_) == 'x'):
-            name = jsonify(xaxis)
+        if  axis_str[1] == x:
+            res = xaxis
+        elif axis.str[1] == y:
+            res = yaxis
         
-        elif (str(axis_) == 'y'):
-            name = jsonify(yaxis)
-        
-        return name
+            
+        resp = jsonify(res)
+        return resp
         
     if request.method == 'GET':
-        get_msg = "method not allowed"
+        get_msg = "Method not allowed"
         return render_template('error.html', msg=get_msg)
 
 def append_list(dq_x):

@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Graph - Error</title>
+    
+    {% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- <script src="{{ url_for('static', filename='plotly-latest.min.js') }}"></script> -->
+    <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
+    {% endblock %}
+
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap-4.3.1.min.css')}}">
+    {% endblock %}
 </head>
 <body>
    <div class="container">
