@@ -132,8 +132,7 @@
         }, 1000);
         
         var plotIntervalY = setInterval(function() {
-            var axisy = "y";
-            fetchAxis(axisy);
+            fetchY();
             var plotTime = new Date();
 
             // fetch and add y_array on every tick
@@ -183,6 +182,26 @@
                 console.log("res length: " + msg.length);
                 $("#success-alert").html(msg);
                 populateAxis(msg, x_array);
+                
+            })
+
+            request.fail(function(jqXHR, textStatus) {
+                $("#error-alert").html("Request failed: " + textStatus);
+            });
+        }
+        
+        function fetchY() {
+            var request = $.ajax({
+                url: "https://sheltered-coast-93272.herokuapp.com/api/yaxis",
+                dataType: "json",
+                method: "POST"
+            });
+            request.done(function(msg) {
+                $("#x-value").html("[" + msg.slice(0, 4) + "]");
+                console.log("res: " + msg);
+                console.log("res length: " + msg.length);
+                $("#success-alert").html(msg);
+                populateAxis(msg, y_array);
                 
             })
 
