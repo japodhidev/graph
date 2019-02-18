@@ -60,7 +60,7 @@
         var plotTime = new Date();
         var plotData = [{
             x: [plotTime],
-            y: [y_str[0], y_str[1]],
+            y: [y_str[0], y_str[1], y_str[2], y_str[3]],
             mode: 'lines+markers',
             line: {
                 color: '#80CAF6'
@@ -89,13 +89,13 @@
                 x: [
                     [plotTime]
                 ],
-                y: [test_array].map(readYValues)
+                y: [test_array]
             }
 
             Plotly.extendTraces(test, pltUpdate, [0])
 
             if (count === 1000) clearInterval(plotInterval);
-        }, 1000);
+        }, 2000);
 
         var fetchDt = setInterval(function() {
             fetch();
