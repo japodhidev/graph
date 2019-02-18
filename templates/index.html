@@ -206,7 +206,7 @@
                 console.log("x-axis: " + msg);
             });
             
-            request.fail(function(){
+            request.fail(function(jqXHR, textStatus){
                 $("#error-alert").html("Request failed: " + textStatus);
             });
         }
