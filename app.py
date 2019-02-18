@@ -81,12 +81,12 @@ def axis(name=None):
         print ("axis: ", axis_)
         
         if (str(axis_) == 'x'):
-            response = jsonify(xaxis)
+            name = jsonify(xaxis)
         
         elif (str(axis_) == 'y'):
-            response = jsonify(yaxis)
+            name = jsonify(yaxis)
         
-        return response
+        return name
         
     if request.method == 'GET':
         get_msg = "method not allowed"
