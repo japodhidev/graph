@@ -59,11 +59,12 @@
 
         var max = y_array.length - 1;
 
-
+        var y_axis = populateAxis();
+        
         var plotTime = new Date();
         var plotData = [{
             x: [plotTime],
-            y: [y_array],
+            y: [y_axis],
             mode: 'lines+markers',
             line: {
                 color: '#80CAF6'
@@ -91,7 +92,7 @@
                 x: [
                     [plotTime]
                 ],
-                y: [y_array].map(readYValues)
+                y: [test_array].map(readYValues)
             }
 
             Plotly.extendTraces(test, pltUpdate, [0])
