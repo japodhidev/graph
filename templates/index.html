@@ -63,7 +63,7 @@
         y_str = y.match(regPat);
 
         console.log("x: " + x_str[0]);
-        console.log("y: " + y_str[0]);
+        console.log("y: " + y_str[2]);
         console.log(y_str.length);
 
         
@@ -80,7 +80,7 @@
         
         var plotDataY = [{
             x: [plotTime],
-            y: [y_str],
+            y: [y_str[0], y_str[1], y_str[2], y_str[3],
             mode: 'lines+markers',
             line: {
                 color: '#FFA500'
