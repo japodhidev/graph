@@ -46,7 +46,8 @@ def pi(name=None):
         # print ("z: ", zaxis)
         x_lst = str(xaxis)
         y_lst = str(yaxis)
-        return render_template('index.html', xa=x_lst, ya=y_lst)
+        z_lst = str(yaxis)
+        return render_template('index.html', xa=x_lst, ya=y_lst, za=z_lst)
 
 @app.route('/api', methods=['POST'])
 def rasp(name=None):

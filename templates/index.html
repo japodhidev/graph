@@ -27,7 +27,18 @@
             <div class="col-auto">
                 <p id="x-value">{{ xa }}</p>
                 <p id="y-value">{{ ya }}</p>
-                <div id="test" style="width: 800px;height: 400px"></div>
+                <div id="x_graph" style="width: 800px;height: 400px"></div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-auto">
+                <p id="x-value">{{ xa }}</p>
+                <p id="y-value">{{ ya }}</p>
+                <div id="y_graph" style="width: 800px;height: 400px"></div>
             </div>
             <div class="col"></div>
         </div>
@@ -44,7 +55,8 @@
         // Global variables
         y_array = [];
         x_array = [];
-        test = document.getElementById('test');
+        x_graph = document.getElementById('x_graph');
+        y_graph = document.getElementById('y_graph');
         var x = document.getElementById("x-value").innerHTML;
         var y = document.getElementById("y-value").innerHTML;
         console.log(x)
@@ -58,6 +70,7 @@
 
         
         var plotTime = new Date();
+        
         var plotData = [{
             x: [plotTime],
             y: [x_str[0], x_str[1], x_str[2], x_str[3]],
@@ -65,7 +78,17 @@
             line: {
                 color: '#80CAF6'
             }
-        }]
+        }];
+        
+        var plotDataY = [{
+            x: [plotTime],
+            y: [y_str[0], y_str[1], y_str[2], y_str[3]],
+            mode: 'lines+markers',
+            line: {
+                color: '#FFA500'
+            }
+        }];
+        
         var plotLayout = {
             title: "Graph Data Visualisation - Displacement Against Time",
             yaxis: {
@@ -76,9 +99,21 @@
                 title: "Time"
             }
         };
+        
+        var plotLayoutY = {
+            title: "Graph Data Visualisation - Displacement Against Time",
+            yaxis: {
+                title: "Displacement - Y",
+                range: [-3, 3]
+            },
+            xaxis: {
+                title: "Time"
+            }
+        }
 
-        Plotly.newPlot(test, plotData, plotLayout);
-
+        Plotly.newPlot(x_graph, plotData, plotLayout);
+        Plotly.newPLot(y_graph, plotDataY, plotLayoutY);
+        
         var count = 0;
 
         var plotInterval = setInterval(function() {
