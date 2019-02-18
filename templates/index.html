@@ -137,8 +137,8 @@
             request.done(function(msg) {
                 console.log("res: " + msg);
                 $("#success-alert").html(msg);
-                populateAxes(msg);
-                console.log("array: " + test_array);
+                // populateAxes(msg);
+                // console.log("array: " + test_array);
             })
 
             request.fail(function(jqXHR, textStatus) {
@@ -149,8 +149,8 @@
         function populateAxes(y_arr) {
             console.log("object length: " + y_arr.length);
             for (var i = 0; i <= y_arr.length; i++) {
-                test_array.splice(0, 1);
-                test_array.push(y_arr[i]);
+                test_array.splice(0, 4, y_arr[i]);
+                // test_array.push(y_arr[i]);
             }
         }
 
