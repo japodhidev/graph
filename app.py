@@ -80,7 +80,7 @@ def axis(name=None):
         res = ''
         x = "x"
         y = "y"
-        axis_ = request.data;
+        axis_ = request.json;
         print ("axis: ", axis_)
         print ("decoded:",axis_.decode("utf-8"))
         axis_str = axis_.decode("utf-8")
