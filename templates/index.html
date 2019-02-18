@@ -132,8 +132,8 @@
         }, 1000);
         
         var plotIntervalY = setInterval(function() {
-            var axis = "y";
-            fetchAxis(axis);
+            var axisy = "y";
+            fetchAxis(axisy);
             var plotTime = new Date();
 
             // fetch and add y_array on every tick
@@ -193,12 +193,14 @@
         
         
         function fetchAxis(axis) {
+            console.log("ax: " + axis);
+            console.log("ax: " + axis.toString());
             var req = $.ajax({
                 url: "https://sheltered-coast-93272.herokuapp.com/api/axis",
                 dataType: "json",
                 method: "POST",
                 data: {
-                    a: axis
+                    a: axis.toString()
                 }
             });
             
