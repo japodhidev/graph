@@ -78,11 +78,15 @@ def y_axis(name=None):
 def axis(name=None):
     if request.method == 'POST':
         axis_ = request.json;
+        print ("axis: ", axis_)
         
         if (str(axis_) == 'x'):
             return jsonify(xaxis)
+        
         elif (str(axis_) == 'y'):
             return jsonify(yaxis)
+        
+        return jsonify(yaxis);
         
     if request.method == 'GET':
         get_msg = "method not allowed"
