@@ -232,7 +232,7 @@
             });
             
             req.fail(function(jqXHR, textStatus){
-                $("#error-alert").html("Request failed: " + textStatus);
+                $("#error-alert").html("Request failed: " + jqXHR.responseText);
             });
         }
         // Read the elements of the y-axis div, populate y_array
