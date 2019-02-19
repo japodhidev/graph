@@ -217,12 +217,19 @@
 //            console.log("ax: " + typeof(axis));
             console.log("ax: " + typeof(axis.toString()));
             
+            if (axis == 'y') {
+                console.log("matched y");
+                dt = axis;
+                console.log(dt);
+            } else {
+               console.log("no match"); 
+            }            
             var req = $.ajax({
                 url: "https://sheltered-coast-93272.herokuapp.com/api/axis",
                 dataType: "json",
                 method: "POST",
                 data: {
-                    "id": JSON.stringify(axis)
+                    "id": 'y'
                 }
             });
             
