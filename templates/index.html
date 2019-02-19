@@ -55,7 +55,9 @@
         x_array = [];
         x_graph = document.getElementById('x_graph');
         y_graph = document.getElementById('y_graph');
-
+        var x = document.getElementById("x-value").innerHTML;
+        var y = document.getElementById("y-value").innerHTML;
+        console.log(x)
         var regPat = /[0-9][.][0-9]+/g;
         x_str = x.match(regPat);
         y_str = y.match(regPat);
