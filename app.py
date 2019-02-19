@@ -81,7 +81,7 @@ def axis(name=None):
         x = "x"
         y = "y"
         axis_ = request.get_json();
-        print ("axis: ", axis_[1])
+        print ("axis: ", axis_)
         
 #        print (len(axis_str))
         
