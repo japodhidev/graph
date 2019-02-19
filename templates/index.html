@@ -57,21 +57,21 @@
         y_graph = document.getElementById('y_graph');
         var x = document.getElementById("x-value").innerHTML;
         var y = document.getElementById("y-value").innerHTML;
-        console.log(x)
+//        console.log(x)
         var regPat = /[0-9][.][0-9]+/g;
         x_str = x.match(regPat);
         y_str = y.match(regPat);
 
-        console.log("x: " + x_str[0]);
-        console.log("y: " + y_str[2]);
-        console.log(y_str.length);
+//        console.log("x: " + x_str[0]);
+//        console.log("y: " + y_str[2]);
+//        console.log(y_str.length);
 
 
         var plotTime = new Date();
 
         var plotData = [{
             x: [plotTime],
-            y: [x_str[0], x_str[1], x_str[2], x_str[3], x_str[4], x_str[5]],
+            y: [x_str[0], x_str[1], x_str[2], x_str[3], x_str[4]],
             mode: 'lines+markers',
             line: {
                 color: '#80CAF6'
@@ -80,7 +80,7 @@
 
         var plotDataY = [{
             x: [plotTime],
-            y: [y_str[0], y_str[1], y_str[2], y_str[3], y_str[4], y_str[5]],
+            y: [y_str[0], y_str[1], y_str[2], y_str[3], y_str[4]],
             mode: 'lines+markers',
             line: {
                 color: '#FFA500'
@@ -173,16 +173,16 @@
                 method: "POST"
             });
             request.done(function(msg) {
-                $("#x-value").html("[" + msg.slice(0, 4) + "]");
-                console.log("res: " + msg);
-                console.log("res length: " + msg.length);
-                $("#success-alert").html(msg);
+//                $("#x-value").html("[" + msg.slice(0, 4) + "]");
+//                console.log("res: " + msg);
+//                console.log("res length: " + msg.length);
+//                $("#success-alert").html(msg);
                 populateAxis(msg, x_array);
 
             })
 
             request.fail(function(jqXHR, textStatus) {
-                $("#error-alert").html("Request failed: " + textStatus);
+//                $("#error-alert").html("Request failed: " + textStatus);
             });
         }
 
@@ -194,15 +194,15 @@
             });
             request.done(function(msg) {
                 $("#y-value").html("[" + msg.slice(0, 4) + "]");
-                console.log("res: " + msg);
-                console.log("res length: " + msg.length);
-                $("#success-alert").html(msg);
+//                console.log("res: " + msg);
+//                console.log("res length: " + msg.length);
+//                $("#success-alert").html(msg);
                 populateAxis(msg, y_array);
 
             })
 
             request.fail(function(jqXHR, textStatus) {
-                $("#error-alert").html("Request failed: " + textStatus);
+//                $("#error-alert").html("Request failed: " + textStatus);
             });
         }
                 
@@ -248,26 +248,10 @@
 //            }
 //
 //        }
-        // Read the elements of the y-axis div, populate y_array
-        //        function readYValues(){
-        //            var y = document.getElementById("y-value").innerHTML;
-        //            var regPat = /[0-9][.][0-9]+/g;
-        //            y_str = y.match(regPat);
-        //            
-        //            for (var j = 0; j <= y_str.length; j++) {
-        //                if (y_array.length == 0){
-        //                    y_array.push(y_str[j]);
-        //                } else {
-        //                    y_array = [];
-        //                }
-        //                
-        //            }
-        //            console.log("array: " + y_array);
-        //            return y_array;
-        //        }
+
 
         function populateAxis(dt, a_array) {
-            console.log("test: " + a_array.length);
+//            console.log("test: " + a_array.length);
             if (a_array.length == 0) {
                 for (var i = 0; i <= dt.length; i++) {
                     a_array.push(dt[i]);
@@ -278,7 +262,7 @@
                     a_array.splice(k, dt.length, dt[k]);
                 }
             }
-            console.log("populated: " + a_array);
+//            console.log("populated: " + a_array);
         }
 
     </script>
