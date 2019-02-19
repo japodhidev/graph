@@ -25,7 +25,9 @@
         <div class="row">
             <div class="col"></div>
             <div class="col-auto">
-                <p id="x-value">{{ xa }}</p>
+              <h5 class="mt-5 text-center">Graph Data Visualisation</h5>
+               <p id="x-value" hidden="hidden">{{ xa }}</p>
+                
                 <div id="x_graph" style="width: 800px;height: 400px"></div>
             </div>
             <div class="col"></div>
@@ -35,7 +37,7 @@
         <div class="row">
             <div class="col"></div>
             <div class="col-auto">
-                <p id="y-value">{{ ya }}</p>
+               <p id="y-value" hidden="hidden">{{ ya }}</p>
                 <div id="y_graph" style="width: 800px;height: 400px"></div>
             </div>
             <div class="col"></div>
@@ -43,7 +45,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="data-wrapper">
+            <div class="data-wrapper" style="display: none">
                 <div id="success-alert" class="alert alert-success"></div>
                 <div id="error-alert" class="alert alert-danger"></div>
             </div>
@@ -88,7 +90,7 @@
         }];
 
         var plotLayout = {
-            title: "Graph Data Visualisation - Displacement Against Time",
+            title: "Graph - Displacement Against Time",
             yaxis: {
                 title: "Displacement - X",
                 range: [-3, 3]
@@ -99,7 +101,7 @@
         };
 
         var plotLayoutY = {
-            title: "Graph Data Visualisation - Displacement Against Time",
+            title: "Graph - Displacement Against Time",
             yaxis: {
                 title: "Displacement - Y",
                 range: [-3, 3]
@@ -182,7 +184,8 @@
             })
 
             request.fail(function(jqXHR, textStatus) {
-//                $("#error-alert").html("Request failed: " + textStatus);
+                $("#data-wrapper").css("display", "block");
+                $("#error-alert").html("Request failed: " + textStatus);
             });
         }
 
@@ -202,7 +205,8 @@
             })
 
             request.fail(function(jqXHR, textStatus) {
-//                $("#error-alert").html("Request failed: " + textStatus);
+                $("#data-wrapper").css("display", "block");
+                $("#error-alert").html("Request failed: " + textStatus);
             });
         }
                 

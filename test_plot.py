@@ -10,7 +10,7 @@ data = {'x': 0.50, 'y': 0.21, 'z': 0.5}
 js_dt = json.dumps(data)
 axis = 'x'
 js = json.dumps(axis)
-response = requests.post('https://sheltered-coast-93272.herokuapp.com/', 
+response = requests.post('http://127.0.0.1:8000', 
 	json=js_dt)
 #print ("js_dt: ", js_dt)
 #print ("data: ", type(data))
