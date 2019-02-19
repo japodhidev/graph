@@ -222,16 +222,15 @@
 //            } else if (axis === "x"){
 //                id = "y"
 //            }
-            var dt = {};
-            dt['id'] = axis.toString();
+            
             
             var req = $.ajax({
                 url: "https://sheltered-coast-93272.herokuapp.com/api/axis",
                 dataType: "json",
                 method: "POST",
-                data:({
-                    JSON.stringify(dt)
-                }),
+                data: {
+                    "id": axis
+                },
                 contentType: "application/json"
             });
             
