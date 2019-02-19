@@ -117,11 +117,11 @@ def append_list(dq_x):
     print ("element: ", type(value))
     print("x: ", xaxis)
     # Limit the length list to 10 elements long
-    if (len(xaxis) == 4):
+    if (len(xaxis) == 8):
         xaxis.pop(0)
         yaxis.pop(0)
     # Counter measure of sorts if the worst comes to
-    if (len(xaxis) == 8):
+    if (len(xaxis) == 10):
         xaxis.clear()
         yaxis.clear()
 
