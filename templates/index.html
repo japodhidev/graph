@@ -133,6 +133,8 @@
         
         var plotIntervalY = setInterval(function() {
             fetchY();
+            
+            fetchAxis('y');
             var plotTime = new Date();
 
             // fetch and add y_array on every tick
@@ -190,41 +192,48 @@
             });
         }
         
-        function fetchY() {
-            var request = $.ajax({
-                url: "https://sheltered-coast-93272.herokuapp.com/api/yaxis",
-                dataType: "json",
-                method: "POST"
-            });
-            request.done(function(msg) {
-                $("#y-value").html("[" + msg.slice(0, 4) + "]");
-                console.log("res: " + msg);
-                console.log("res length: " + msg.length);
-                $("#success-alert").html(msg);
-                populateAxis(msg, y_array);
-                
-            })
-
-            request.fail(function(jqXHR, textStatus) {
-                $("#error-alert").html("Request failed: " + textStatus);
-            });
-        }
-        
+//        function fetchY() {
+//            var request = $.ajax({
+//                url: "https://sheltered-coast-93272.herokuapp.com/api/yaxis",
+//                dataType: "json",
+//                method: "POST"
+//            });
+//            request.done(function(msg) {
+//                $("#y-value").html("[" + msg.slice(0, 4) + "]");
+//                console.log("res: " + msg);
+//                console.log("res length: " + msg.length);
+//                $("#success-alert").html(msg);
+//                populateAxis(msg, y_array);
+//                
+//            })
+//
+//            request.fail(function(jqXHR, textStatus) {
+//                $("#error-alert").html("Request failed: " + textStatus);
+//            });
+//        }
+//        
         
         function fetchAxis(axis) {
 //            console.log("ax: " + typeof(axis));
             console.log("ax: " + typeof(axis.toString()));
+            
+//            if (axis === "y"){
+//                id = "x"
+//            } else if (axis === "x"){
+//                id = "y"
+//            }
+            
             var req = $.ajax({
                 url: "https://sheltered-coast-93272.herokuapp.com/api/axis",
                 dataType: "json",
                 method: "POST",
                 data: {
-                    a: axis.toString()
+                    id: axis
                 }
             });
             
             req.done(function(msg){
-                console.log("x-axis: " + msg);
+                console.log("y-axis: " + msg);
                 populateAxis(msg, y_array);
             });
             
