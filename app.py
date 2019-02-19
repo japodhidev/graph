@@ -63,6 +63,7 @@ def rasp(name=None):
 @app.route('/api/xaxis', methods=['POST'])
 def x_axis(name=None):
     # Return y-axis values as a json response
+    print ("x length: ", len(xaxis))
     xax = jsonify(xaxis)
     
     return xax
@@ -74,29 +75,29 @@ def y_axis(name=None):
     
     return yax
 
-@app.route('/api/axis', methods=['POST', 'GET'])
-def axis(name=None):
-    if request.method == 'POST':
-        res = ''
-        x = "x"
-        y = "y"
-        axis_ = request.get_json();
-        print ("axis: ", axis_)
-        
-#        print (len(axis_str))
-        
-        if  axis_[1] == x:
-            res = xaxis
-        elif axis_[1] == y:
-            res = yaxis
-        
-            
-        resp = jsonify(res)
-        return resp
-        
-    if request.method == 'GET':
-        get_msg = "Method not allowed"
-        return render_template('error.html', msg=get_msg)
+#@app.route('/api/axis', methods=['POST', 'GET'])
+#def axis(name=None):
+#    if request.method == 'POST':
+#        res = ''
+#        x = "x"
+#        y = "y"
+#        axis_ = request.get_json();
+#        print ("axis: ", axis_)
+#        
+##        print (len(axis_str))
+#        
+#        if  axis_[1] == x:
+#            res = xaxis
+#        elif axis_[1] == y:
+#            res = yaxis
+#        
+#            
+#        resp = jsonify(res)
+#        return resp
+#        
+#    if request.method == 'GET':
+#        get_msg = "Method not allowed"
+#        return render_template('error.html', msg=get_msg)
 
 def append_list(dq_x):
     print("data: ", dq_x)
