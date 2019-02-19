@@ -80,15 +80,14 @@ def axis(name=None):
         res = ''
         x = "x"
         y = "y"
-        axis_ = request.json;
-        print ("axis: ", axis_)
-        print ("decoded:",axis_.decode("utf-8"))
-        axis_str = axis_.decode("utf-8")
+        axis_ = request.get_json();
+        print ("axis: ", axis_[1])
+        
 #        print (len(axis_str))
         
-        if  axis_str[1] == x:
+        if  axis_[1] == x:
             res = xaxis
-        elif axis.str[1] == y:
+        elif axi_[1] == y:
             res = yaxis
         
             

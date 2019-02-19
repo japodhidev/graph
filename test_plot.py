@@ -3,14 +3,15 @@ import plotly.graph_objs as go
 import requests
 import json
 
-data = {'x': 0.46, 'y': 0.10, 'z': 0.5}
+data = {'x': 0.45, 'y': 0.36, 'z': 0.5}
 
 # for key, value in data.items():
 # 	print (key, value)
 js_dt = json.dumps(data)
 axis = 'x'
-response = requests.post('https://sheltered-coast-93272.herokuapp.com', 
-	json=js_dt)
+js = json.dumps(axis)
+response = requests.post('http://127.0.0.1:8000/api/axis', 
+	json=js)
 #print ("js_dt: ", js_dt)
 #print ("data: ", type(data))
 if response.ok:
