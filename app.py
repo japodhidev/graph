@@ -114,8 +114,8 @@ def append_list(dq_x):
             zaxis.append(value)
             
         counter = counter + 1
-    print ("element: ", type(value))
-    print("x: ", xaxis)
+#    print ("element: ", type(value))
+#    print("x: ", xaxis)
     # Limit the length list to 10 elements long
     if (len(xaxis) == 8):
         xaxis.pop(0)
