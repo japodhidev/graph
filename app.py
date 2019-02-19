@@ -87,8 +87,9 @@ def axis(name=None):
         
         if  axis_[1] == x:
             res = xaxis
-        elif axi_[1] == y:
+        elif axis_[1] == y:
             res = yaxis
+        
             
         resp = jsonify(res)
         return resp
