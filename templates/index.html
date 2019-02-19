@@ -132,7 +132,7 @@
         }, 1000);
 
         var plotIntervalY = setInterval(function() {
-            
+            fetchY();
             var plotTime = new Date();
 
             // fetch and add y_array on every tick
@@ -144,7 +144,7 @@
             }
 
             Plotly.extendTraces(y_graph, pltUpdate, [0])
-            fetchY();
+            
             if (count === 1000) clearInterval(plotInterval);
         }, 1000);
     
