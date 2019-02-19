@@ -45,7 +45,7 @@
         <div class="row">
             <div class="data-wrapper">
                 <div id="success-alert" class="alert alert-success"></div>
-                <div class="alert alert-danger"></div>
+                <div id="error-alert" class="alert alert-danger"></div>
             </div>
         </div>
     </div>
@@ -217,21 +217,13 @@
 //            console.log("ax: " + typeof(axis));
             console.log("ax: " + typeof(axis.toString()));
             
-//            if (axis === "y"){
-//                id = "x"
-//            } else if (axis === "x"){
-//                id = "y"
-//            }
-            
-            
             var req = $.ajax({
                 url: "https://sheltered-coast-93272.herokuapp.com/api/axis",
                 dataType: "json",
                 method: "POST",
                 data: {
                     "id": JSON.stringify(axis)
-                },
-                contentType: "application/json"
+                }
             });
             
             req.done(function(msg){
