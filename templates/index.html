@@ -59,14 +59,10 @@
         y_graph = document.getElementById('y_graph');
         var x = document.getElementById("x-value").innerHTML;
         var y = document.getElementById("y-value").innerHTML;
-//        console.log(x)
+
         var regPat = /[0-9][.][0-9]+/g;
         x_str = x.match(regPat);
         y_str = y.match(regPat);
-
-//        console.log("x: " + x_str[0]);
-//        console.log("y: " + y_str[2]);
-//        console.log(y_str.length);
 
 
         var plotTime = new Date();
@@ -120,7 +116,7 @@
             fetch();
             var plotTime = new Date();
 
-            // fetch and add y_array on every tick
+            // fetch and add x_array on every tick
             var pltUpdate = {
                 x: [
                     [plotTime]

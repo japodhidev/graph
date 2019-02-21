@@ -1,12 +1,3 @@
-import dash
-from dash.dependencies import Input, Output
-import dash_core_components as dcc
-import dash_html_components as html
-import plotly
-import random
-import plotly.graph_objs as go
-from collections import deque
-
 # Flask specific imports
 from flask import Flask, request, jsonify
 import json
@@ -19,12 +10,6 @@ app = Flask(__name__)
 yaxis = []
 xaxis = []
 zaxis = []
-
-# Dash Graph's x, y axes
-# X = deque(maxlen=20)
-# X.append(1)
-# Y = deque(maxlen=20)
-# Y.append(1)
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -117,7 +102,7 @@ def append_list(dq_x):
         counter = counter + 1
 #    print ("element: ", type(value))
 #    print("x: ", xaxis)
-    # Limit the length list to 10 elements long
+    # Limit the length list to 6 elements long
     if (len(xaxis) == 6 or len(yaxis) == 6):
         xaxis.pop(0)
         yaxis.pop(0)
@@ -126,9 +111,6 @@ def append_list(dq_x):
         xaxis.clear()
         yaxis.clear()
 
-# xaxis = xaxis[:3]
-# yaxis = yaxis[:3]
-# zaxis = zaxis[:3]
 
 if __name__ == '__main__':
     app.run(debug=True)
