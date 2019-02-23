@@ -52,7 +52,7 @@ def user():
         send uuid relevant data back to the requested url
     '''
     uid = request.script_root()
-    validate_uuid(uid=)
+    validate_uuid(uid)
 
 @app.route('/api/xaxis', methods=['POST'])
 def x_axis(name=None):
