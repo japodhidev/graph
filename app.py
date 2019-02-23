@@ -2,6 +2,7 @@
 from flask import Flask, request, jsonify
 import json
 from flask import render_template, url_for, Response
+from uuid import UUID
 
 # Initialise Flask app
 app = Flask(__name__)
@@ -40,24 +41,32 @@ def rasp(name=None):
     pi_data = request.json
     # Populate variables with the data received
     append_list(pi_data)
-    
+
     # Return a json response
     return jsonify(pi_data)
 
+@app.route('/api/<uuid:user_id>', methods=['POST'])
+def user():
+    '''
+        Use the UUID as unique identify, somehow, add checks for validity of the uuid,
+        send uuid relevant data back to the requested url
+    '''
+    uid = request.script_root()
+    validate_uuid(uid=)
 
 @app.route('/api/xaxis', methods=['POST'])
 def x_axis(name=None):
     # Return y-axis values as a json response
     print ("x length: ", len(xaxis))
     xax = jsonify(xaxis)
-    
+
     return xax
 
 @app.route('/api/yaxis', methods=['POST'])
 def y_axis(name=None):
     # Return y-axis values as a json response
     yax = jsonify(yaxis)
-    
+
     return yax
 
 #@app.route('/api/axis', methods=['POST', 'GET'])
@@ -68,18 +77,18 @@ def y_axis(name=None):
 #        y = "y"
 #        axis_ = request.get_json();
 #        print ("axis: ", axis_)
-#        
+#
 ##        print (len(axis_str))
-#        
+#
 #        if  axis_[1] == x:
 #            res = xaxis
 #        elif axis_[1] == y:
 #            res = yaxis
-#        
-#            
+#
+#
 #        resp = jsonify(res)
 #        return resp
-#        
+#
 #    if request.method == 'GET':
 #        get_msg = "Method not allowed"
 #        return render_template('error.html', msg=get_msg)
@@ -98,7 +107,7 @@ def append_list(dq_x):
             yaxis.append(value)
         elif counter == 2:
             zaxis.append(value)
-            
+
         counter = counter + 1
 #    print ("element: ", type(value))
 #    print("x: ", xaxis)
@@ -111,6 +120,18 @@ def append_list(dq_x):
         xaxis.clear()
         yaxis.clear()
 
+def validate_uuid(uid):
+    uid = uid.decode("utf-8")
+    uid_ = uid[1:]
+
+    # Validate UUID
+    try:
+        valid = UUID(uid_, version=4)
+        message = {'status': 'A valid UUID was provided'}
+    except ValueError as e:
+        message = {'status': 'An invalid UUID was provided'}
+
+    return jsonify(message)
 
 if __name__ == '__main__':
     app.run(debug=True)
