@@ -52,8 +52,9 @@
     </div>
     <script>
         // Global variables
-        y_array = [];
         x_array = [];
+        y_array = [];
+
         axis_time = [];
         x_graph = document.getElementById('x_graph');
         y_graph = document.getElementById('y_graph');
@@ -65,12 +66,9 @@
           getY();
         }, 1000);
 
-        var test_array = [x_array[0], x_array[1], x_array[2]];
-        console.log("sample: " + test_array);
-
         var data = [{
-          x: ['2019-02-23 09:11:22', '2019-02-23 09:11:58', '2019-02-23 09:37:32', '2019-02-23 09:39:18'],
-          y: [x_array[0], x_array[1], x_array[2]],
+          x: [axis_time],
+          y: [x_array],
           mode: 'lines+markers'
         }];
 
@@ -84,31 +82,32 @@
                 title: "Time"
             }
         };
+
         // Plotly.newPlot(x_graph, data, layout);
         var graph = setTimeout(function(){
           Plotly.newPlot(x_graph, data, layout);
-          console.log("time: " + typeof(axis_time));
         }, 5000);
-
 
         // Ajax calls to CSV endpoints
         function getX(){
+
           var request = $.ajax({
             url: "http://127.0.0.1:8000/api/history/x",
             dataType: "json",
             method: "POST",
           });
           request.done(function(msg){
-            populateAxis(msg.x, x_array);
-            x_array = Array.from(x_array);
-            populateTimeAxis(msg.timestamp, axis_time);
-            console.log("here " + typeof("here"));
+            x_ = Array.from(Object.values(msg.x));
+            a_ = Array.from(Object.values(msg.timestamp));
+            populateArrays(x_, x_array);
+            populateArrays(a_, axis_time);
           });
 
           request.fail(function(jqXHR, textStatus){
             console.log("Request failed: " + error);
           });
         }
+
 
         function getY(){
           var request = $.ajax({
@@ -117,8 +116,8 @@
             method: "POST",
           });
           request.done(function(msg){
-            populateAxis(msg.y, y_array);
-            // console.log(y_array);
+            y_ = Array.from(Object.values(msg.y));
+            populateArrays(y_, y_array);
           });
 
           request.fail(function(jqXHR, textStatus){
@@ -126,34 +125,9 @@
           });
         }
 
-        function populateAxis(dt, a_array) {
-            // console.log("test: " + a_array.length);
-            if (a_array.length == 0) {
-                for (var i = 0; i <= dt.length; i++) {
-                    a_array.push(dt[i]);
-                }
-            } else {
-                // test_array.length = 0;
-                for (var k = 0; k < dt.length; k++) {
-                    a_array.splice(k, dt.length, dt[k]);
-                }
-            }
-           console.log("populated: " + a_array);
-        }
-
-        function populateTimeAxis(dt, a_array) {
-            // console.log("test: " + a_array.length);
-            if (a_array.length == 0) {
-                for (var i = 0; i <= dt.length; i++) {
-                    a_array.push(dt[String(i)]);
-                }
-            } else {
-                // test_array.length = 0;
-                for (var k = 0; k < dt.length; k++) {
-                    a_array.splice(k, dt.length, dt[k]);
-                }
-            }
-//            console.log("populated: " + a_array);
+        function populateArrays(dt, a_array){
+          // a_array.concat(dt);
+          a_array = dt;
         }
     </script>
 </body>
