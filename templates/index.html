@@ -146,7 +146,7 @@
             if (count === 1000) clearInterval(plotInterval);
         }, 1000);
 
-
+        testUUID();
         // Plotly.newPlot(test, [{
         // 	x: x_str,
         // 	y: y_str,
@@ -162,6 +162,28 @@
         // 		title: 'xaxis title'
         // 	}
         // })
+
+        // Ajax call to test UUID endpoint
+        var uid = getUUID();
+
+        var uidUri = "https://sheltered-coast-93272.herokuapp.com/api/" + uid;
+        console.log(uidUri);
+
+        function testUUID(){
+          var req = $.ajax({
+            url: uidUri,
+            method: "POST"
+          });
+
+          req.done(function(msg){
+            console.log(msg);
+          });
+
+          req.fail(function(jqXHR, textStatus){
+            console.log("UUID Request failed: " + textStatus);
+          });
+
+        }
 
         // Ajax call to endpoint, append values to HTML element
         function fetch() {

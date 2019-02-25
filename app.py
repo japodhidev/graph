@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify
 import json
 from flask import render_template, url_for, Response
 from uuid import UUID
+import validators
 
 # Initialise Flask app
 app = Flask(__name__)
@@ -45,19 +46,35 @@ def rasp(name=None):
     # Return a json response
     return jsonify(pi_data)
 
-@app.route('/api/<uuid:user_id>', methods=['POST'])
-def user():
+@app.route('/api/<userid>', methods=['POST'])
+def user(userid):
     '''
         Use the UUID as unique identify, somehow, add checks for validity of the uuid,
         send uuid relevant data back to the requested url
     '''
-    uid = request.script_root()
-    validate_uuid(uid)
+    boolTry = validators.uuid(str(userid))
+    
+    if boolTry == True:
+        message = {'status': 'A valid UUID was provided'}
+        return jsonify(message)
+    else:
+        message = {'status': 'An invalid UUID was provided'}
+        return jsonify(message)
+    # Validate UUID
+    # try:
+    #     valid = UUID(str(userid), version=4)
+    #     message = {'status': 'A valid UUID was provided'}
+    #
+    #     return jsonify(message)
+    # except ValueError as e:
+    #     message = {'status': 'An invalid UUID was provided'}
+    #
+    #     return jsonify(message)
 
 @app.route('/api/xaxis', methods=['POST'])
 def x_axis(name=None):
     # Return y-axis values as a json response
-    print ("x length: ", len(xaxis))
+    # print ("x length: ", len(xaxis))
     xax = jsonify(xaxis)
 
     return xax
@@ -121,17 +138,15 @@ def append_list(dq_x):
         yaxis.clear()
 
 def validate_uuid(uid):
-    uid = uid.decode("utf-8")
-    uid_ = uid[1:]
-
     # Validate UUID
     try:
-        valid = UUID(uid_, version=4)
-        message = {'status': 'A valid UUID was provided'}
-    except ValueError as e:
-        message = {'status': 'An invalid UUID was provided'}
+        valid = UUID(str(uid), version=4)
 
-    return jsonify(message)
+        return True
+    except ValueError as e:
+
+        return False
+
 
 if __name__ == '__main__':
     app.run(debug=True)
