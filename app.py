@@ -202,7 +202,7 @@ def write_csv(data):
         if key == 'z':
             z.append(value)
     # print(x, y, z)
-    date_c = get_time();
+    date_c = get_time()
     # print(date_c['timestamp'])
     date_t = pd.Timestamp(date_c['timestamp'])
     raw_data = {'timestamp': date_t, 'day': date_c['day'], 'x-axis': x, 'y-axis': y, 'z-axis': z}
