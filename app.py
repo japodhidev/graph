@@ -39,8 +39,6 @@ def pi(name=None):
         # print ("y: ", yaxis)
         # print ("x: ", xaxis)
         # print ("z: ", zaxis)
-        yaxis.clear()
-        xaxis.clear()
 
         x_lst = str(xaxis)
         y_lst = str(yaxis)
@@ -183,7 +181,7 @@ def get_time():
 
 def read_csv():
     ''' Read timestamp, x, y & z values from file '''
-    d_frame = pd.read_csv('test.csv')
+    d_frame = pd.read_csv('histogram.csv')
     # print (d_frame)
     return d_frame
 
@@ -210,7 +208,7 @@ def write_csv(data):
     raw_data = {'timestamp': date_t, 'day': date_c['day'], 'x-axis': x, 'y-axis': y, 'z-axis': z}
 
     d_frame = pd.DataFrame(raw_data, columns = ['timestamp', 'day', 'x-axis', 'y-axis', 'z-axis'])
-    d_frame.to_csv('test.csv', mode='a', header=False, index='Unnamed: 0')
+    d_frame.to_csv('histogram.csv', mode='a', header=False, index='Unnamed: 0')
 
 def historyPopulate():
     # Read in data from csv and populate axes
