@@ -196,7 +196,7 @@ def write_csv(data):
     # data = {'x': 1, 'y': 3, 'z': 0}
     dt_ = json.loads(data)
     # Append each value in a dict in a corresponding list variable
-    for key, value in data.items():
+    for key, value in dt_.items():
         if key == 'x':
             x.append(value)
         if key == 'y':
