@@ -190,9 +190,9 @@ def read_csv():
 def write_csv(data):
     ''' Write relevant data to a CSV file on request '''
 
-    # x = []
-    # y = []
-    # z = []
+    x = []
+    y = []
+    z = []
     # data = {'x': 1, 'y': 3, 'z': 0}
     dt_ = json.loads(data)
     # Append each value in a dict in a corresponding list variable
