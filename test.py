@@ -3,6 +3,7 @@ import pandas as pd
 from plotly import __version__
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 import plotly.graph_objs as go
+import requests
 
 def get_time():
     ''' Get the time now in 0000-00-00 00:00:00 format'''
@@ -11,7 +12,6 @@ def get_time():
     d_d = d_time.strftime('%A')
     time_dict = {'timestamp': d_t, 'day': d_d}
     return time_dict
-
 
 def write_csv():
     ''' Write relevant data to a CSV file on request '''
@@ -46,9 +46,26 @@ def read_csv():
 def return_json(data_f):
     return data_f.to_json(orient='index')
 
+def populate():
+    x = []
+    d_ = read_csv()
+    for i in d_['x-axis']:
+        x.append(i)
+
+    print(x)
+
+def uploadFile():
+    files = {'csv_file': open('test.csv', 'rb')}
+    values = {'DB': 'photcat', 'OUT': 'csv', 'SHORT': 'short'}
+
+    r = requests.post('https://sheltered-coast-93272.herokuapp.com', files=files,
+    data=values)
+
 if __name__ == '__main__':
     # write_csv()
-    d_F = read_csv()
-    print(return_json(d_F))
+    # d_F = read_csv()
+    # print(return_json(d_F))
     # data = [go.Scatter( x=d_F['timestamp'], y=d_F['y-axis'] )]
     # plot(data, filename='pandas-time-series')
+    # populate()
+    # uploadFile()

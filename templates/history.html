@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta http-equiv="refresh" content="15; URL=https://sheltered-coast-93272.herokuapp.com/"> -->
+    <!-- <meta http-equiv="refresh" content="5; URL=http://127.0.0.1:8000/"> -->
+
+    <title>Graph</title>
+    {% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- <script src="{{ url_for('static', filename='plotly-latest.min.js') }}"></script> -->
+    <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
+    {% endblock %}
+
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap-4.3.1.min.css')}}">
+    {% endblock %}
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-auto">
+              <h5 class="mt-5 text-center">Graph Data Visualisation</h5>
+               <p id="x-value" hidden="hidden">{{ xa }}</p>
+
+                <div id="x_graph" style="width: 800px;height: 400px"></div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-auto">
+               <p id="y-value" hidden="hidden">{{ ya }}</p>
+                <div id="y_graph" style="width: 800px;height: 400px"></div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="data-wrapper" style="display: none">
+                <div id="success-alert" class="alert alert-success"></div>
+                <div id="error-alert" class="alert alert-danger"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Global variables
+        y_array = [];
+        x_array = [];
+        test_array = [1, 4, 3, 6, 2, 9, 8];
+        axis_time = [];
+        x_graph = document.getElementById('x_graph');
+        y_graph = document.getElementById('y_graph');
+
+        var plotTime = new Date();
+
+        var getDt = setTimeout(function(){
+          var x = getX();
+          var y = getY();
+        }, 1000);
+
+        var data = [{
+          x: ['2019-02-23 09:11:22', '2019-02-23 09:11:58', '2019-02-23 09:37:32', '2019-02-23 09:39:18'],
+          y: [x_array[0], x_array[1], x_array[2]],
+          mode: 'lines+markers'
+        }];
+
+        var layout = {
+            title: "Graph - Displacement Against Time",
+            yaxis: {
+                title: "Displacement - X",
+                range: [-1, 9]
+            },
+            xaxis: {
+                title: "Time"
+            }
+        };
+        // Plotly.newPlot(x_graph, data, layout);
+        var graph = setTimeout(function(){
+          Plotly.newPlot(x_graph, data, layout);
+          console.log("time: " + typeof(axis_time));
+        }, 5000);
+
+
+        // Ajax calls to CSV endpoints
+        function getX(){
+          var request = $.ajax({
+            url: "http://127.0.0.1:8000/api/history/x",
+            dataType: "json",
+            method: "POST",
+          });
+          request.done(function(msg){
+            populateAxis(msg.x, x_array);
+            populateTimeAxis(msg.timestamp, axis_time);
+            console.log("here " + typeof("here"));
+          });
+
+          request.fail(function(jqXHR, textStatus){
+            console.log("Request failed: " + error);
+          });
+        }
+
+        function getY(){
+          var request = $.ajax({
+            url: "http://127.0.0.1:8000/api/history/y",
+            dataType: "json",
+            method: "POST",
+          });
+          request.done(function(msg){
+            populateAxis(msg.y, y_array);
+            // console.log(y_array);
+          });
+
+          request.fail(function(jqXHR, textStatus){
+            console.log("Request failed: " + error);
+          });
+        }
+
+        function populateAxis(dt, a_array) {
+            // console.log("test: " + a_array.length);
+            if (a_array.length == 0) {
+                for (var i = 0; i <= dt.length; i++) {
+                    a_array.push(dt[i]);
+                }
+            } else {
+                // test_array.length = 0;
+                for (var k = 0; k < dt.length; k++) {
+                    a_array.splice(k, dt.length, dt[k]);
+                }
+            }
+//            console.log("populated: " + a_array);
+        }
+
+        function populateTimeAxis(dt, a_array) {
+            // console.log("test: " + a_array.length);
+            if (a_array.length == 0) {
+                for (var i = 0; i <= dt.length; i++) {
+                    a_array.push(dt[String(i)]);
+                }
+            } else {
+                // test_array.length = 0;
+                for (var k = 0; k < dt.length; k++) {
+                    a_array.splice(k, dt.length, dt[k]);
+                }
+            }
+//            console.log("populated: " + a_array);
+        }
+    </script>
+</body>
+</html>

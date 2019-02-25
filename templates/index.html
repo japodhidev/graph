@@ -64,6 +64,9 @@
         x_str = x.match(regPat);
         y_str = y.match(regPat);
 
+        // Initiate array population
+        fetchY();
+        fetch();
 
         var plotTime = new Date();
 
@@ -73,7 +76,8 @@
             mode: 'lines+markers',
             line: {
                 color: '#80CAF6'
-            }
+            },
+            connectgaps: true
         }];
 
         var plotDataY = [{
@@ -82,14 +86,15 @@
             mode: 'lines+markers',
             line: {
                 color: '#FFA500'
-            }
+            },
+            connectgaps: true
         }];
 
         var plotLayout = {
             title: "Graph - Displacement Against Time",
             yaxis: {
                 title: "Displacement - X",
-                range: [-1, 1]
+                range: [-0.1, 0.1]
             },
             xaxis: {
                 title: "Time"
@@ -100,7 +105,7 @@
             title: "Graph - Displacement Against Time",
             yaxis: {
                 title: "Displacement - Y",
-                range: [-1, 1]
+                range: [-0.1, 0.1]
             },
             xaxis: {
                 title: "Time"
