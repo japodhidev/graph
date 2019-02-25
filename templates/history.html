@@ -61,11 +61,13 @@
         var plotTime = new Date();
 
         var getDt = setTimeout(function(){
-          var x = getX();
-          var y = getY();
+          getX();
+          getY();
         }, 1000);
+
         var test_array = [x_array[0], x_array[1], x_array[2]];
         console.log("sample: " + test_array);
+
         var data = [{
           x: ['2019-02-23 09:11:22', '2019-02-23 09:11:58', '2019-02-23 09:37:32', '2019-02-23 09:39:18'],
           y: [x_array[0], x_array[1], x_array[2]],
@@ -98,6 +100,7 @@
           });
           request.done(function(msg){
             populateAxis(msg.x, x_array);
+            x_array = Array.from(x_array);
             populateTimeAxis(msg.timestamp, axis_time);
             console.log("here " + typeof("here"));
           });
