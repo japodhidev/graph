@@ -125,7 +125,7 @@ def historyY():
 #        return render_template('error.html', msg=get_msg)
 
 def append_list(dq_x):
-    print("data: ", type(dq_x))
+    print("data: ", dq_x)
     # Load data sent through the request
     # dq_ = json.dumps(dq_x)
     # print ("dq_: ", type(dq_))
@@ -216,6 +216,7 @@ def write_csv(data):
     d_frame = pd.DataFrame(raw_data, columns = ['timestamp', 'day', 'x-axis', 'y-axis', 'z-axis'])
     print("d_frame: ", d_frame)
     d_frame.to_csv('histogram.csv', mode='w', header=True, index='Unnamed: 0')
+    print("after file write")
 
 def historyPopulate():
     # Read in data from csv and populate axes
