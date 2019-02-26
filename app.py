@@ -26,19 +26,11 @@ def pi(name=None):
 
     if request.method == 'POST':
         pi_data = request.json
-        # print(f'Value from client {pi_data}')
         append_list(pi_data)
         write_csv(pi_data)
-        # for i in pi_data:
-        #     # X.append(pi_data[i])
-        #     print ("i: ", pi_data[i])
-        # print ("Here: ", list(X))
-        # append_list(X)
+
         return jsonify(pi_data)
     if request.method == 'GET':
-        # print ("y: ", yaxis)
-        # print ("x: ", xaxis)
-        # print ("z: ", zaxis)
 
         x_lst = str(xaxis)
         y_lst = str(yaxis)
@@ -100,30 +92,6 @@ def historyY():
     y = {'y': y_h, 'timestamp': axis_time}
     return jsonify(y)
 
-#@app.route('/api/axis', methods=['POST', 'GET'])
-#def axis(name=None):
-#    if request.method == 'POST':
-#        res = ''
-#        x = "x"
-#        y = "y"
-#        axis_ = request.get_json();
-#        print ("axis: ", axis_)
-#
-##        print (len(axis_str))
-#
-#        if  axis_[1] == x:
-#            res = xaxis
-#        elif axis_[1] == y:
-#            res = yaxis
-#
-#
-#        resp = jsonify(res)
-#        return resp
-#
-#    if request.method == 'GET':
-#        get_msg = "Method not allowed"
-#        return render_template('error.html', msg=get_msg)
-
 def append_list(dq_x):
     print("data: ", dq_x)
     # Load data sent through the requests
@@ -169,7 +137,7 @@ def get_time():
 def read_csv():
     ''' Read timestamp, x, y & z values from file '''
     d_frame = pd.read_csv('histogram.csv')
-    # print (d_frame)
+
     return d_frame
 
 def write_csv(data):
@@ -178,10 +146,7 @@ def write_csv(data):
     x = []
     y = []
     z = []
-    # data = {'x': 1, 'y': 3, 'z': 0}
-    # print("raw data: ", type(data))
-    # dt_ = json.dumps(data)
-    # print("processed data: ", type(dt_))
+
     # Append each value in a dict in a corresponding list variable
     for key, value in data.items():
         if key == 'x':
@@ -190,9 +155,9 @@ def write_csv(data):
             y.append(value)
         if key == 'z':
             z.append(value)
-    # print(x, y, z)
+
     date_c = get_time()
-    # print(date_c['timestamp'])
+
     date_t = pd.Timestamp(date_c['timestamp'])
     raw_data = {'timestamp': date_t, 'day': date_c['day'], 'x-axis': x, 'y-axis': y, 'z-axis': z}
     d_frame = pd.DataFrame(raw_data, columns = ['timestamp', 'day', 'x-axis', 'y-axis', 'z-axis'])
