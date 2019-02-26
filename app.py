@@ -28,6 +28,7 @@ def pi(name=None):
         pi_data = request.json
         # print(f'Value from client {pi_data}')
         # append_list(pi_data)
+        print("test write data: ", pi_data)
         write_csv(pi_data)
         # for i in pi_data:
         #     # X.append(pi_data[i])
