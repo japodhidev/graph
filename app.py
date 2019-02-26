@@ -93,6 +93,10 @@ def historyY():
     y = {'y': y_h, 'timestamp': axis_time}
     return jsonify(y)
 
+@app.route('/test')
+def test():
+    return render_template('test.html')
+    
 def append_list(dq_x):
     print("data: ", dq_x)
     # Load data sent through the requests
