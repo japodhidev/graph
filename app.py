@@ -28,7 +28,6 @@ def pi(name=None):
         pi_data = request.json
         # print(f'Value from client {pi_data}')
         # append_list(pi_data)
-        print("test write data: ", type(pi_data))
         write_csv(pi_data)
         # for i in pi_data:
         #     # X.append(pi_data[i])
@@ -183,7 +182,9 @@ def write_csv(data):
     y = []
     z = []
     # data = {'x': 1, 'y': 3, 'z': 0}
+    print("raw data: ", type(data))
     dt_ = json.loads(data)
+    print("processed data: ", type(dt_))
     # Append each value in a dict in a corresponding list variable
     for key, value in dt_.items():
         if key == 'x':
@@ -199,7 +200,7 @@ def write_csv(data):
     raw_data = {'timestamp': date_t, 'day': date_c['day'], 'x-axis': x, 'y-axis': y, 'z-axis': z}
 
     d_frame = pd.DataFrame(raw_data, columns = ['timestamp', 'day', 'x-axis', 'y-axis', 'z-axis'])
-    d_frame.to_csv('histogram.csv', mode='a', header=False, index='Unnamed: 0')
+    d_frame.to_csv('histogram.csv', mode='w', header=True, index='Unnamed: 0')
 
 def historyPopulate():
     # Read in data from csv and populate axes

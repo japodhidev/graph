@@ -4,6 +4,7 @@ from plotly import __version__
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 import plotly.graph_objs as go
 import requests
+import json
 
 def get_time():
     ''' Get the time now in 0000-00-00 00:00:00 format'''
@@ -19,9 +20,12 @@ def write_csv():
     x = []
     y = []
     z = []
-    data = {'x': 1, 'y': 3, 'z': 2}
+    data = '{"x": 1.104, "y": -0.036, "z": 0.052}'
+    # print(type(data))
+    d_ = json.loads(data);
+    # print(type(d_))
     # Append each value in a dict in a corresponding list variable
-    for key, value in data.items():
+    for key, value in d_.items():
         if key == 'x':
             x.append(value)
         if key == 'y':
