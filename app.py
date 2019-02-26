@@ -79,11 +79,12 @@ def y_axis(name=None):
 
 @app.route('/api/history', methods=['GET'])
 def history():
-    historyPopulate()
+
     return render_template('history.html')
 
 @app.route('/api/history/x', methods=['POST'])
 def historyX():
+    historyPopulate()
     x = {'x': x_h, 'timestamp': axis_time}
     return jsonify(x)
 
@@ -106,11 +107,11 @@ def append_list(dq_x):
             zaxis.append(value)
 
     # Limit the length list to 6 elements long
-    if (len(xaxis) == 4 or len(yaxis) == 4):
-        # xaxis.pop(0)
-        # yaxis.pop(0)
-        del xaxis[0:3]
-        del yaxis[0:3]
+    if (len(xaxis) == 2 or len(yaxis) == 2):
+        xaxis.pop(0)
+        yaxis.pop(0)
+        # del xaxis[0:3]
+        # del yaxis[0:3]
     # Counter measure of sorts if the worst comes to
     if (len(xaxis) == 10):
         xaxis.clear()
