@@ -215,7 +215,7 @@ def write_csv(data):
     print ("raw data: ", raw_data)
     d_frame = pd.DataFrame(raw_data, columns = ['timestamp', 'day', 'x-axis', 'y-axis', 'z-axis'])
     print("d_frame: ", d_frame)
-    d_frame.to_csv('histogram.csv', mode='w', header=True, index='Unnamed: 0')
+    d_frame.to_csv('histogram.csv', mode='a', header=False, index='Unnamed: 0')
     print("after file write")
 
 def historyPopulate():
