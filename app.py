@@ -125,9 +125,10 @@ def historyY():
 #        return render_template('error.html', msg=get_msg)
 
 def append_list(dq_x):
-    print("data: ", dq_x)
+    print("data: ", type(dq_x))
     # Load data sent through the request
-    # dq_ = json.loads(dq_x)
+    # dq_ = json.dumps(dq_x)
+    # print ("dq_: ", type(dq_))
     # Loop counter for iterating through the values sent
     # counter = 0
     # Populate the values into coordinates
