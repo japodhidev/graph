@@ -113,9 +113,9 @@ def append_list(dq_x):
         # del xaxis[0:3]
         # del yaxis[0:3]
     # Counter measure of sorts if the worst comes to
-    if (len(xaxis) == 10):
-        xaxis.clear()
-        yaxis.clear()
+    # if (len(xaxis) == 10):
+    #     xaxis.clear()
+    #     yaxis.clear()
 
 def validate_uuid(uid):
     # Validate UUID
