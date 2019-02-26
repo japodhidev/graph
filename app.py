@@ -69,16 +69,6 @@ def user(userid):
     else:
         message = {'status': 'An invalid UUID was provided'}
         return jsonify(message)
-    # Validate UUID
-    # try:
-    #     valid = UUID(str(userid), version=4)
-    #     message = {'status': 'A valid UUID was provided'}
-    #
-    #     return jsonify(message)
-    # except ValueError as e:
-    #     message = {'status': 'An invalid UUID was provided'}
-    #
-    #     return jsonify(message)
 
 @app.route('/api/xaxis', methods=['POST'])
 def x_axis(name=None):
