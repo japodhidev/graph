@@ -106,7 +106,7 @@ def append_list(dq_x):
             zaxis.append(value)
 
     # Limit the length list to 6 elements long
-    if (len(xaxis) == 6 or len(yaxis) == 6):
+    if (len(xaxis) == 4 or len(yaxis) == 4):
         # xaxis.pop(0)
         # yaxis.pop(0)
         del xaxis[0:3]
