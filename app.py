@@ -193,30 +193,24 @@ def write_csv(data):
     y = []
     z = []
     # data = {'x': 1, 'y': 3, 'z': 0}
-    print("raw data: ", type(data))
+    # print("raw data: ", type(data))
     # dt_ = json.dumps(data)
     # print("processed data: ", type(dt_))
     # Append each value in a dict in a corresponding list variable
     for key, value in data.items():
         if key == 'x':
-            print('x: ', value)
             x.append(value)
         if key == 'y':
-            print('y: ', value)
             y.append(value)
         if key == 'z':
-            print('z: ', value)
             z.append(value)
     # print(x, y, z)
     date_c = get_time()
     # print(date_c['timestamp'])
     date_t = pd.Timestamp(date_c['timestamp'])
     raw_data = {'timestamp': date_t, 'day': date_c['day'], 'x-axis': x, 'y-axis': y, 'z-axis': z}
-    print ("raw data: ", raw_data)
     d_frame = pd.DataFrame(raw_data, columns = ['timestamp', 'day', 'x-axis', 'y-axis', 'z-axis'])
-    print("d_frame: ", d_frame)
     d_frame.to_csv('histogram.csv', mode='a', header=True, index='Unnamed: 0')
-    print("after file write")
 
 def historyPopulate():
     # Read in data from csv and populate axes
