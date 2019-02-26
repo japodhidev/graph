@@ -80,23 +80,6 @@
                 title: "Time"
             }
         };
-        var layoutx = {
-          shapes: [
-            {
-              type: 'line',
-              xref: 'paper',
-              x0: 0,
-              y0: 0.5,
-              x1: 1,
-              y1: 0.5,
-              line: {
-                color: 'rgb(255, 245, 0)',
-                width: 2,
-                dash: 'dot'
-              }
-            }
-          ]
-        };
 
         var layouty = {
             title: "Graph - Displacement Against Time",
@@ -108,6 +91,7 @@
                 title: "Time"
             }
         };
+
 
         var graph = setTimeout(function(){
           var data = [{
@@ -125,16 +109,61 @@
             }
           }];
 
+
+          var traceWarn = {
+            title: "Graph - Displacement Against Time",
+            yaxis: {
+                title: "Displacement - Y",
+                range: [-1, 2]
+            },
+            xaxis: {
+                title: "Time"
+            },
+            shapes: [
+              {
+                type: 'rect',
+                xref: 'x',
+                yref: 'paper',
+                x0: axis_time[0],
+                y0: 0.5,
+                x1: axis_time[axis_time.length-1],
+                y1: 0.7,
+                line: {
+                  color: 'rgb(255, 226, 71)'
+                },
+                layer: "above",
+                fillcolor: 'rgb(255, 226, 71)',
+                opacity: 0.4
+              },
+              {
+                type: 'rect',
+                xref: 'x',
+                yref: 'paper',
+                x0: axis_time[0],
+                y0: 0.7,
+                x1: axis_time[axis_time.length-1],
+                y1: 0.9,
+                line: {
+                  color: 'rgb(44, 255, 92)'
+                },
+                layer: "above",
+                fillcolor: 'rgb(44, 255, 92)',
+                opacity: 0.4
+              }
+            ]
+          };
+
           Plotly.newPlot(x_graph, data, layout);
           Plotly.newPlot(y_graph, datay, layouty);
-          Plotly.newPlot(test_graph, [datay], layoutx);
+          Plotly.newPlot(test_graph, datay, traceWarn);
+          console.log(x_array)
         }, 1000);
 
         // Ajax calls to CSV endpoints
         function getX(){
 
           var request = $.ajax({
-            url: "https://sheltered-coast-93272.herokuapp.com/api/history/x",
+            url: "http://127.0.0.1:8000/api/history/x",
             dataType: "json",
             method: "POST",
           });
@@ -153,7 +182,7 @@
 
         function getY(){
           var request = $.ajax({
-            url: "https://sheltered-coast-93272.herokuapp.com/api/history/y",
+            url: "http://127.0.0.1:8000/api/history/y",
             dataType: "json",
             method: "POST",
           });
