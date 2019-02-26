@@ -27,7 +27,7 @@ def pi(name=None):
     if request.method == 'POST':
         pi_data = request.json
         # print(f'Value from client {pi_data}')
-        # append_list(pi_data)
+        append_list(pi_data)
         write_csv(pi_data)
         # for i in pi_data:
         #     # X.append(pi_data[i])
@@ -127,19 +127,29 @@ def historyY():
 def append_list(dq_x):
     print("data: ", dq_x)
     # Load data sent through the request
-    dq_ = json.loads(dq_x)
+    # dq_ = json.loads(dq_x)
     # Loop counter for iterating through the values sent
-    counter = 0
+    # counter = 0
     # Populate the values into coordinates
-    for key, value in dq_.items():
-        if counter == 0:
+    # for key, value in dq_.items():
+    #     if counter == 0:
+    #         xaxis.append(value)
+    #     elif counter == 1:
+    #         yaxis.append(value)
+    #     elif counter == 2:
+    #         zaxis.append(value)
+    #
+    #     counter = counter + 1
+    for key, value in data.items():
+        if key == 'x':
+            print('x: ', value)
             xaxis.append(value)
-        elif counter == 1:
+        if key == 'y':
+            print('y: ', value)
             yaxis.append(value)
-        elif counter == 2:
+        if key == 'z':
+            print('z: ', value)
             zaxis.append(value)
-
-        counter = counter + 1
 #    print ("element: ", type(value))
 #    print("x: ", xaxis)
     # Limit the length list to 6 elements long
@@ -183,23 +193,27 @@ def write_csv(data):
     z = []
     # data = {'x': 1, 'y': 3, 'z': 0}
     print("raw data: ", type(data))
-    dt_ = json.loads(data)
-    print("processed data: ", type(dt_))
+    # dt_ = json.dumps(data)
+    # print("processed data: ", type(dt_))
     # Append each value in a dict in a corresponding list variable
-    for key, value in dt_.items():
+    for key, value in data.items():
         if key == 'x':
+            print('x: ', value)
             x.append(value)
         if key == 'y':
+            print('y: ', value)
             y.append(value)
         if key == 'z':
+            print('z: ', value)
             z.append(value)
     # print(x, y, z)
     date_c = get_time()
     # print(date_c['timestamp'])
     date_t = pd.Timestamp(date_c['timestamp'])
     raw_data = {'timestamp': date_t, 'day': date_c['day'], 'x-axis': x, 'y-axis': y, 'z-axis': z}
-
+    print ("raw data: ", raw_data)
     d_frame = pd.DataFrame(raw_data, columns = ['timestamp', 'day', 'x-axis', 'y-axis', 'z-axis'])
+    print("d_frame: ", d_frame)
     d_frame.to_csv('histogram.csv', mode='w', header=True, index='Unnamed: 0')
 
 def historyPopulate():
