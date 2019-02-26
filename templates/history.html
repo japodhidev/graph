@@ -9,7 +9,6 @@
     <title>Graph</title>
     {% block scripts %}
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <!-- <script src="{{ url_for('static', filename='plotly-latest.min.js') }}"></script> -->
     <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
     {% endblock %}
 
@@ -24,7 +23,7 @@
         <div class="row">
             <div class="col"></div>
             <div class="col-auto">
-              <h5 class="mt-5 text-center">Graph Data Visualisation</h5>
+              <h5 class="mt-5 text-center">Graph Data Visualisation - History</h5>
                <p id="x-value" hidden="hidden">{{ xa }}</p>
 
                 <div id="x_graph" style="width: 800px;height: 400px"></div>
@@ -51,56 +50,73 @@
         </div>
     </div>
     <script>
+
         // Global variables
         x_array = [];
         y_array = [];
-
         axis_time = [];
         x_graph = document.getElementById('x_graph');
         y_graph = document.getElementById('y_graph');
 
-        var plotTime = new Date();
-
-        var getDt = setTimeout(function(){
-          getX();
-          getY();
-        }, 1000);
-
-        var data = [{
-          x: [axis_time],
-          y: [x_array],
-          mode: 'lines+markers'
-        }];
+        getY();
+        getX();
 
         var layout = {
             title: "Graph - Displacement Against Time",
             yaxis: {
                 title: "Displacement - X",
-                range: [-1, 9]
+                range: [-1, 10]
             },
             xaxis: {
                 title: "Time"
             }
         };
 
-        // Plotly.newPlot(x_graph, data, layout);
+        var layouty = {
+            title: "Graph - Displacement Against Time",
+            yaxis: {
+                title: "Displacement - Y",
+                range: [-1, 10]
+            },
+            xaxis: {
+                title: "Time"
+            }
+        };
+
         var graph = setTimeout(function(){
+          var data = [{
+            x: axis_time,
+            y: x_array,
+            mode: 'lines+markers'
+          }];
+
+          var datay = [{
+            x: axis_time,
+            y: y_array,
+            mode: 'lines+markers',
+            line: {
+              color: '#FFA500',
+            }
+          }];
+
           Plotly.newPlot(x_graph, data, layout);
-        }, 5000);
+          Plotly.newPlot(y_graph, datay, layouty);
+        }, 1000);
 
         // Ajax calls to CSV endpoints
         function getX(){
 
           var request = $.ajax({
-            url: "http://127.0.0.1:8000/api/history/x",
+            url: "https://sheltered-coast-93272.herokuapp.com/api/history/x",
             dataType: "json",
             method: "POST",
           });
           request.done(function(msg){
             x_ = Array.from(Object.values(msg.x));
             a_ = Array.from(Object.values(msg.timestamp));
-            populateArrays(x_, x_array);
-            populateArrays(a_, axis_time);
+            x_array = populateArrays(x_);
+            axis_time = populateArrays(a_);
+
           });
 
           request.fail(function(jqXHR, textStatus){
@@ -108,16 +124,15 @@
           });
         }
 
-
         function getY(){
           var request = $.ajax({
-            url: "http://127.0.0.1:8000/api/history/y",
+            url: "https://sheltered-coast-93272.herokuapp.com/api/history/y",
             dataType: "json",
             method: "POST",
           });
           request.done(function(msg){
             y_ = Array.from(Object.values(msg.y));
-            populateArrays(y_, y_array);
+            y_array = populateArrays(y_);
           });
 
           request.fail(function(jqXHR, textStatus){
@@ -125,10 +140,11 @@
           });
         }
 
-        function populateArrays(dt, a_array){
-          // a_array.concat(dt);
-          a_array = dt;
+        function populateArrays(dt){
+          return dt;
         }
+
+
     </script>
 </body>
 </html>

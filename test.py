@@ -19,7 +19,7 @@ def write_csv():
     x = []
     y = []
     z = []
-    data = {'x': 1, 'y': 3, 'z': 0}
+    data = {'x': 1, 'y': 3, 'z': 2}
     # Append each value in a dict in a corresponding list variable
     for key, value in data.items():
         if key == 'x':
@@ -35,11 +35,11 @@ def write_csv():
     raw_data = {'timestamp': date_t, 'day': date_c['day'], 'x-axis': x, 'y-axis': y, 'z-axis': z}
 
     d_frame = pd.DataFrame(raw_data, columns = ['timestamp', 'day', 'x-axis', 'y-axis', 'z-axis'])
-    d_frame.to_csv('test.csv', mode='a', header=False, index='Unnamed: 0')
+    d_frame.to_csv('histogram.csv', mode='a', header=False, index='Unnamed: 0')
 
 def read_csv():
     ''' Read timestamp, x, y & z values from file '''
-    d_frame = pd.read_csv('test.csv')
+    d_frame = pd.read_csv('histogram.csv')
     # print (d_frame)
     return d_frame
 
@@ -62,7 +62,7 @@ def uploadFile():
     data=values)
 
 if __name__ == '__main__':
-    # write_csv()
+    write_csv()
     # d_F = read_csv()
     # print(return_json(d_F))
     # data = [go.Scatter( x=d_F['timestamp'], y=d_F['y-axis'] )]
