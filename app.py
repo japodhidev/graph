@@ -140,7 +140,7 @@ def append_list(dq_x):
     #         zaxis.append(value)
     #
     #     counter = counter + 1
-    for key, value in data.items():
+    for key, value in dq_x.items():
         if key == 'x':
             print('x: ', value)
             xaxis.append(value)

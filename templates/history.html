@@ -72,6 +72,23 @@
                 title: "Time"
             }
         };
+        var layoutx = {
+          shapes: [
+            {
+              type: 'line',
+              xref: 'paper',
+              x0: 0,
+              y0: 0.5,
+              x1: 1,
+              y1: 0.5,
+              line: {
+                color: 'rgb(255, 245, 0)',
+                width: 2,
+                dash: 'dot'
+              }
+            }
+          ]
+        };
 
         var layouty = {
             title: "Graph - Displacement Against Time",
@@ -101,7 +118,7 @@
           }];
 
           Plotly.newPlot(x_graph, data, layout);
-          Plotly.newPlot(y_graph, datay, layouty);
+          Plotly.newPlot(y_graph, datay, [layoutx]);
         }, 1000);
 
         // Ajax calls to CSV endpoints
