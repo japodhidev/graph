@@ -126,37 +126,23 @@ def historyY():
 
 def append_list(dq_x):
     print("data: ", dq_x)
-    # Load data sent through the request
-    # dq_ = json.dumps(dq_x)
-    # print ("dq_: ", type(dq_))
-    # Loop counter for iterating through the values sent
-    # counter = 0
+    # Load data sent through the requests
     # Populate the values into coordinates
-    # for key, value in dq_.items():
-    #     if counter == 0:
-    #         xaxis.append(value)
-    #     elif counter == 1:
-    #         yaxis.append(value)
-    #     elif counter == 2:
-    #         zaxis.append(value)
-    #
-    #     counter = counter + 1
+
     for key, value in dq_x.items():
         if key == 'x':
-            print('x: ', value)
             xaxis.append(value)
         if key == 'y':
-            print('y: ', value)
             yaxis.append(value)
         if key == 'z':
-            print('z: ', value)
             zaxis.append(value)
-#    print ("element: ", type(value))
-#    print("x: ", xaxis)
+
     # Limit the length list to 6 elements long
     if (len(xaxis) == 6 or len(yaxis) == 6):
-        xaxis.pop(0)
-        yaxis.pop(0)
+        # xaxis.pop(0)
+        # yaxis.pop(0)
+        del xaxis[0:3]
+        del yaxis[0:3]
     # Counter measure of sorts if the worst comes to
     if (len(xaxis) == 10):
         xaxis.clear()
