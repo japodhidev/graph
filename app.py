@@ -67,19 +67,18 @@ def x_axis(name=None):
     # Return y-axis values as a json response
     # print ("x length: ", len(xaxis))
     xax = jsonify(xaxis)
-
+    print("res x: ", xax)
     return xax
 
 @app.route('/api/yaxis', methods=['POST'])
 def y_axis(name=None):
     # Return y-axis values as a json response
     yax = jsonify(yaxis)
-
+    print("res y: ", yax)
     return yax
 
 @app.route('/api/history', methods=['GET'])
 def history():
-
     return render_template('history.html')
 
 @app.route('/api/history/x', methods=['POST'])
@@ -177,14 +176,15 @@ def historyPopulate():
     d_frame = read_csv()
 
     # Loop through each series and populate axes
-    for i in d_frame['x-axis']:
-        x_h.append(i)
+    if not x_h:
+        for i in d_frame['x-axis']:
+            x_h.append(i)
 
-    for j in d_frame['y-axis']:
-        y_h.append(j)
+        for j in d_frame['y-axis']:
+            y_h.append(j)
 
-    for k in d_frame['timestamp']:
-        axis_time.append(k)
+        for k in d_frame['timestamp']:
+            axis_time.append(k)
 
 if __name__ == '__main__':
     app.run(debug=True)
