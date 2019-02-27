@@ -21,12 +21,13 @@
     <script>
         var test = setInterval(function(){
           var request = $.ajax({
-              url: "https://127.0.0.1:8000/",
+              url: "https://127.0.0.1:8000/api/yaxis",
               method: "POST",
               dataType: "json"
           });
           request.done(function(msg){
               $("#success-alert").html(msg);
+              console.log(msg);
           })
 
           request.fail(function(jqXHR, textStatus) {
