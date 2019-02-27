@@ -106,6 +106,7 @@ def append_list(dq_x):
         if key == 'x':
             xaxis.append(value)
             print("x: ", len(xaxis))
+            print("value: ", xaxis)
         if key == 'y':
             yaxis.append(value)
         if key == 'z':
@@ -115,6 +116,7 @@ def append_list(dq_x):
     if (len(xaxis) == 2 or len(yaxis) == 2):
         xaxis.pop(0)
         print("pop 0 x: ", len(xaxis))
+        print("value: ", xaxis)
         yaxis.pop(0)
         # del xaxis[0:3]
         # del yaxis[0:3]
