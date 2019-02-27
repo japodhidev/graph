@@ -21,7 +21,7 @@
     <script>
         var test = setInterval(function(){
           var request = $.ajax({
-              url: "https://sheltered-coast-93272.herokuapp.com/",
+              url: "https://127.0.0.1:8000/",
               method: "POST",
               dataType: "json"
           });
@@ -31,8 +31,8 @@
 
           request.fail(function(jqXHR, textStatus) {
              $("#error-alert").html("Request failed: " + textStatus);
-          }, 5000);
-        });
+          });
+        }, 5000);
     </script>
 
 </body>
