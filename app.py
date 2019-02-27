@@ -171,7 +171,7 @@ def write_csv(data):
     date_t = pd.Timestamp(date_c['timestamp'])
     raw_data = {'timestamp': date_t, 'day': date_c['day'], 'x-axis': x, 'y-axis': y, 'z-axis': z}
     d_frame = pd.DataFrame(raw_data, columns = ['timestamp', 'day', 'x-axis', 'y-axis', 'z-axis'])
-    d_frame.to_csv('histogram.csv', mode='a', header=True, index='Unnamed: 0')
+    d_frame.to_csv('histogram.csv', mode='a', header=False, index='Unnamed: 0')
 
 def historyPopulate():
     # Read in data from csv and populate axes
