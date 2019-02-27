@@ -182,21 +182,21 @@ def historyPopulate():
     # Loop through each series and populate axes
     # Only populate empty lists
     for i in d_frame['x-axis']:
-        if not x_h:
+        if len(x_h) == 0:
             x_h.append(i)
         else:
             x_h.clear()
             x_h.append(i)
 
     for j in d_frame['y-axis']:
-        if not y_h:
+        if len(y_h) == 0:
             y_h.append(j)
         else:
             y_h.clear()
             y_h.append(j)
 
     for k in d_frame['timestamp']:
-        if not axis_time:
+        if len(axis_time) == 0:
             axis_time.append(k)
         else:
             axis_time.clear()
