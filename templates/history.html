@@ -24,7 +24,7 @@
             <div class="col">
             </div>
             <div class="col-auto">
-              <h5 class="mt-5 text-center">Graph Data Visualisation - History</h5>
+              <h5 class="mt-5 text-center">Vibration Analysis Graph - History</h5>
                 <p id="x-value" hidden="hidden">{{ xa }}</p>
 
                 <div id="x_graph" style="width: 800px;height: 400px"></div>
@@ -66,13 +66,13 @@
         axis_time = [];
         x_graph = document.getElementById('x_graph');
         y_graph = document.getElementById('y_graph');
-        
+
         getX();
         getY();
 
 
         var layout = {
-            title: "Graph - Displacement Against Time",
+            title: "Vibraration Analysis Graph - Displacement Against Time",
             yaxis: {
                 title: "Displacement - X",
                 range: [-1, 1]
@@ -83,7 +83,7 @@
         };
 
         var layouty = {
-            title: "Graph - Displacement Against Time",
+            title: "Vibration Analysis Graph - Displacement Against Time",
             yaxis: {
                 title: "Displacement - Y",
                 range: [-1, 1]
@@ -112,7 +112,7 @@
 
 
           var traceWarn = {
-            title: "Graph - Displacement Against Time",
+            title: "Vibration Analysis Graph - Displacement Against Time",
             yaxis: {
                 title: "Displacement - Y",
                 range: [-1, 2]
