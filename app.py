@@ -75,16 +75,18 @@ def y_axis(name=None):
 
 @app.route('/api/history', methods=['GET'])
 def history():
-    historyPopulate()
+    # historyPopulate()
     return render_template('history.html')
 
 @app.route('/api/history/x', methods=['POST'])
 def historyX():
+    historyPopulate()
     x = {'x': x_h, 'timestamp': axis_time}
     return jsonify(x)
 
 @app.route('/api/history/y', methods=['POST'])
 def historyY():
+    historyPopulate()
     y = {'y': y_h, 'timestamp': axis_time}
     return jsonify(y)
 

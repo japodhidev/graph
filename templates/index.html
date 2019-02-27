@@ -184,7 +184,6 @@
                 method: "POST"
             });
             request.done(function(msg) {
-                console.log("res x: " + msg);
                 populateAxis(msg, x_array);
             })
 
@@ -201,7 +200,6 @@
                 method: "POST"
             });
             request.done(function(msg) {
-                console.log("res: " + msg);
                 populateAxis(msg, y_array);
             })
 
