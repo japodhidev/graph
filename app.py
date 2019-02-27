@@ -75,7 +75,7 @@ def y_axis(name=None):
 
 @app.route('/api/history', methods=['GET'])
 def history():
-    # historyPopulate()
+    historyPopulate()
     return render_template('history.html')
 
 @app.route('/api/history/x', methods=['POST'])
