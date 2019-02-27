@@ -152,44 +152,29 @@
             if (count === 2000) clearInterval(plotInterval);
         }, 2000);
 
-        testUUID();
-        // Plotly.newPlot(test, [{
-        // 	x: x_str,
-        // 	y: y_str,
-        // }], {
-        // 	margin: {
-        // 		t: 0
-        // 	},
-        // 	yaxis: {
-        // 		tickformat: '%H:%M:%S',
-        // 		title: 'yaxis title'
-        // 	},
-        // 	xaxis: {
-        // 		title: 'xaxis title'
-        // 	}
-        // })
-
-        // Ajax call to test UUID endpoint
-        var uid = getUUID();
-
-        var uidUri = "https://sheltered-coast-93272.herokuapp.com/api/" + uid;
-        console.log(uidUri);
-
-        function testUUID(){
-          var req = $.ajax({
-            url: uidUri,
-            method: "POST"
-          });
-
-          req.done(function(msg){
-            console.log(msg);
-          });
-
-          req.fail(function(jqXHR, textStatus){
-            console.log("UUID Request failed: " + textStatus);
-          });
-
-        }
+        // testUUID();
+        //
+        // // Ajax call to test UUID endpoint
+        // var uid = getUUID();
+        //
+        // var uidUri = "https://sheltered-coast-93272.herokuapp.com/api/" + uid;
+        // console.log(uidUri);
+        //
+        // function testUUID(){
+        //   var req = $.ajax({
+        //     url: uidUri,
+        //     method: "POST"
+        //   });
+        //
+        //   req.done(function(msg){
+        //     console.log(msg);
+        //   });
+        //
+        //   req.fail(function(jqXHR, textStatus){
+        //     console.log("UUID Request failed: " + textStatus);
+        //   });
+        //
+        // }
 
         // Ajax call to endpoint, append values to HTML element
         function fetch() {
@@ -199,10 +184,7 @@
                 method: "POST"
             });
             request.done(function(msg) {
-//                $("#x-value").html("[" + msg.slice(0, 4) + "]");
-//                console.log("res: " + msg);
-//                console.log("res length: " + msg.length);
-//                $("#success-alert").html(msg);
+                console.log("res x: " + msg);
                 populateAxis(msg, x_array);
 
             })
@@ -220,12 +202,8 @@
                 method: "POST"
             });
             request.done(function(msg) {
-//                $("#y-value").html("[" + msg.slice(0, 4) + "]");
-//                console.log("res: " + msg);
-//                console.log("res length: " + msg.length);
-//                $("#success-alert").html(msg);
+                console.log("res: " + msg);
                 populateAxis(msg, y_array);
-
             })
 
             request.fail(function(jqXHR, textStatus) {
