@@ -68,7 +68,7 @@ def x_axis(name=None):
     # print ("x length: ", len(xaxis))
     print("res x: ", xaxis)
     xax = jsonify(xaxis)
-    xaxis.pop(0)
+    xaxis.clear()
     print("res pop'd x: ", xaxis)
     return xax
 
@@ -77,7 +77,7 @@ def y_axis(name=None):
     # Return y-axis values as a json response
     print("res y: ", yaxis)
     yax = jsonify(yaxis)
-    yaxis.pop(0)
+    yaxis.clear()
     print("res pop'd y: ", yaxis)
     return yax
 
