@@ -66,15 +66,17 @@ def user(userid):
 def x_axis(name=None):
     # Return y-axis values as a json response
     # print ("x length: ", len(xaxis))
+    print("res x: ", xaxis)
     xax = jsonify(xaxis)
-    print("res x: ", xax)
+
     return xax
 
 @app.route('/api/yaxis', methods=['POST'])
 def y_axis(name=None):
     # Return y-axis values as a json response
+    print("res y: ", yaxis)
     yax = jsonify(yaxis)
-    print("res y: ", yax)
+
     return yax
 
 @app.route('/api/history', methods=['GET'])
