@@ -108,8 +108,8 @@ def append_list(dq_x):
     for key, value in dq_x.items():
         if key == 'x':
             xaxis.append(value)
-            print("x: ", len(xaxis))
-            print("value: ", xaxis)
+            # print("x: ", len(xaxis))
+            # print("value: ", xaxis)
         if key == 'y':
             yaxis.append(value)
         if key == 'z':
@@ -173,7 +173,7 @@ def write_csv(data):
     date_t = pd.Timestamp(date_c['timestamp'])
     raw_data = {'timestamp': date_t, 'day': date_c['day'], 'x-axis': x, 'y-axis': y, 'z-axis': z}
     d_frame = pd.DataFrame(raw_data, columns = ['timestamp', 'day', 'x-axis', 'y-axis', 'z-axis'])
-    d_frame.to_csv('histogram.csv', mode='a', header=False, index='Unnamed: 0')
+    d_frame.to_csv('/app/histogram.csv', mode='a', header=False, index='Unnamed: 0')
 
 def historyPopulate():
     # Read in data from csv and populate axes
