@@ -20,7 +20,6 @@ y_h = []
 axis_time = []
 
 
-
 @app.route('/', methods=['POST', 'GET'])
 def pi(name=None):
 
@@ -65,20 +64,14 @@ def user(userid):
 @app.route('/api/xaxis', methods=['POST'])
 def x_axis(name=None):
     # Return y-axis values as a json response
-    # print ("x length: ", len(xaxis))
-    print("res x: ", xaxis)
     xax = jsonify(xaxis)
-    xaxis.clear()
-    print("res pop'd x: ", xaxis)
     return xax
 
 @app.route('/api/yaxis', methods=['POST'])
 def y_axis(name=None):
     # Return y-axis values as a json response
-    print("res y: ", yaxis)
     yax = jsonify(yaxis)
-    yaxis.clear()
-    print("res pop'd y: ", yaxis)
+
     return yax
 
 @app.route('/api/history', methods=['GET'])
@@ -108,8 +101,6 @@ def append_list(dq_x):
     for key, value in dq_x.items():
         if key == 'x':
             xaxis.append(value)
-            # print("x: ", len(xaxis))
-            # print("value: ", xaxis)
         if key == 'y':
             yaxis.append(value)
         if key == 'z':
@@ -121,12 +112,7 @@ def append_list(dq_x):
         print("pop 0 x: ", len(xaxis))
         print("value: ", xaxis)
         yaxis.pop(0)
-        # del xaxis[0:3]
-        # del yaxis[0:3]
-    # Counter measure of sorts if the worst comes to
-    # if (len(xaxis) == 10):
-    #     xaxis.clear()
-    #     yaxis.clear()
+
 
 def validate_uuid(uid):
     # Validate UUID
