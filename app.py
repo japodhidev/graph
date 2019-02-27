@@ -113,7 +113,7 @@ def append_list(dq_x):
             zaxis.append(value)
 
     # Limit the length list to 6 elements long
-    if (len(xaxis) == 2 or len(yaxis) == 2):
+    if (len(xaxis) == 3 or len(yaxis) == 3):
         xaxis.pop(0)
         print("pop 0 x: ", len(xaxis))
         print("value: ", xaxis)
