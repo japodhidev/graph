@@ -71,7 +71,6 @@ def x_axis(name=None):
 def y_axis(name=None):
     # Return y-axis values as a json response
     yax = jsonify(yaxis)
-
     return yax
 
 @app.route('/api/history', methods=['GET'])
