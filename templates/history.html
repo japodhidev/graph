@@ -66,9 +66,10 @@
         axis_time = [];
         x_graph = document.getElementById('x_graph');
         y_graph = document.getElementById('y_graph');
-
-        getY();
+        
         getX();
+        getY();
+
 
         var layout = {
             title: "Graph - Displacement Against Time",
@@ -156,7 +157,7 @@
           Plotly.newPlot(x_graph, data, layout);
           Plotly.newPlot(y_graph, datay, layouty);
           Plotly.newPlot(test_graph, datay, traceWarn);
-          
+
         }, 1000);
 
         // Ajax calls to CSV endpoints
