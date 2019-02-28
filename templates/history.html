@@ -68,7 +68,7 @@
         y_graph = document.getElementById('y_graph');
 
         getX();
-        getY();
+        // getY();
 
         var layout = {
             title: "Vibraration Analysis Graph - Displacement Against Time",
@@ -169,9 +169,12 @@
           request.done(function(msg){
             x_ = Array.from(Object.values(msg.x));
             a_ = Array.from(Object.values(msg.timestamp));
+            y_ = Array.from(Object.values(msg.y));
             x_array = populateArrays(x_);
             axis_time = populateArrays(a_);
+            y_array = populateArrays(y_);
 
+            console.log(y_array);
             console.log(x_array);
             console.log(axis_time)
 
@@ -182,22 +185,22 @@
           });
         }
 
-        function getY(){
-          var request = $.ajax({
-            url: "https://sheltered-coast-93272.herokuapp.com/api/history/y",
-            dataType: "json",
-            method: "POST",
-          });
-          request.done(function(msg){
-            y_ = Array.from(Object.values(msg.y));
-            y_array = populateArrays(y_);
-            console.log(y_array);
-          });
-
-          request.fail(function(jqXHR, textStatus){
-            console.log("Request failed: " + jqXHR.responseText);
-          });
-        }
+        // function getY(){
+        //   var request = $.ajax({
+        //     url: "http://127.0.0.1:8000/api/history/y",
+        //     dataType: "json",
+        //     method: "POST",
+        //   });
+        //   request.done(function(msg){
+        //     y_ = Array.from(Object.values(msg.y));
+        //     y_array = populateArrays(y_);
+        //     console.log(y_array);
+        //   });
+        //
+        //   request.fail(function(jqXHR, textStatus){
+        //     console.log("Request failed: " + jqXHR.responseText);
+        //   });
+        // }
 
         function populateArrays(dt){
           return dt;
