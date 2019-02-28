@@ -172,10 +172,13 @@
             x_array = populateArrays(x_);
             axis_time = populateArrays(a_);
 
+            console.log(x_array);
+            console.log(axis_time)
+
           });
 
           request.fail(function(jqXHR, textStatus){
-            console.log("Request failed: " + error);
+            console.log("Request failed: " + jqXHR.responseText);
           });
         }
 
@@ -188,10 +191,11 @@
           request.done(function(msg){
             y_ = Array.from(Object.values(msg.y));
             y_array = populateArrays(y_);
+            console.log(y_array);
           });
 
           request.fail(function(jqXHR, textStatus){
-            console.log("Request failed: " + error);
+            console.log("Request failed: " + jqXHR.responseText);
           });
         }
 
