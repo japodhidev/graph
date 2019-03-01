@@ -192,7 +192,7 @@
         // Ajax call to endpoint, append values to HTML element
         function getEndpoint() {
           var request = $.ajax({
-            url: "http://127.0.0.1:8000",
+            url: "https://sheltered-coast-93272.herokuapp.com",
             method: "GET"
           });
 
@@ -207,7 +207,7 @@
 
         function getAxes() {
           var request = $.ajax({
-            url: "http://127.0.0.1:8000/api/axes",
+            url: "https://sheltered-coast-93272.herokuapp.com/api/axes",
             dataType: "json",
             method: "POST"
           });
@@ -229,7 +229,7 @@
 
         function fetch() {
             var request = $.ajax({
-                url: "http://127.0.0.1:8000/api/xaxis",
+                url: "https://sheltered-coast-93272.herokuapp.com/api/xaxis",
                 dataType: "json",
                 method: "POST"
             });
@@ -245,7 +245,7 @@
 
         function fetchY() {
             var request = $.ajax({
-                url: "http://127.0.0.1:8000/api/yaxis",
+                url: "https://sheltered-coast-93272.herokuapp.com/api/yaxis",
                 dataType: "json",
                 method: "POST"
             });
@@ -258,49 +258,6 @@
                 $("#error-alert").html("Request failed: " + textStatus);
             });
         }
-
-
-//        function fetchAxis(axis) {
-//            //            console.log("ax: " + typeof(axis));
-//            console.log("ax: " + typeof(axis.toString()));
-//
-//            if (axis == 'y') {
-//                //                console.log("matched y");
-//                //                dt = axis;
-//                //                console.log(dt);
-//                var req = $.ajax({
-//                    url: "https://sheltered-coast-93272.herokuapp.com/api/yaxis",
-//                    dataType: "json",
-//                    method: "POST"
-//                });
-//
-//                req.done(function(msg) {
-//                    console.log("y-axis: " + msg);
-//                    populateAxis(msg, y_array);
-//                });
-//
-//                req.fail(function(jqXHR, textStatus) {
-//                    $("#error-alert").html("Request failed: " + jqXHR.responseText);
-//                });
-//
-//            } else if (axis == 'x') {
-//                var req = $.ajax({
-//                    url: "https://sheltered-coast-93272.herokuapp.com/api/xaxis",
-//                    dataType: "json",
-//                    method: "POST"
-//                });
-//
-//                req.done(function(msg) {
-//                    console.log("x-axis: " + msg);
-//                    populateAxis(msg, x_array);
-//                });
-//
-//                req.fail(function(jqXHR, textStatus) {
-//                    $("#error-alert").html("Request failed: " + jqXHR.responseText);
-//                });
-//            }
-//
-//        }
 
 
         function populateAxis(dt, a_array) {
