@@ -73,6 +73,14 @@ def y_axis(name=None):
     yax = jsonify(yaxis)
     return yax
 
+@app.route('/api/axes', methods=['POST'])
+def axes(name=None):
+    # x_ = jsonify(xaxis)
+    # y_ = jsonixy(yaxis)
+    ax_ = {'x': xaxis, 'y': yaxis}
+    clearList()
+    return jsonify(ax_)
+
 @app.route('/api/history/', methods=['GET'])
 def history():
     historyPopulate()
@@ -105,13 +113,15 @@ def append_list(dq_x):
         if key == 'z':
             zaxis.append(value)
 
+
+
+def clearList():
     # Limit the length list to 6 elements long
     if (len(xaxis) == 3 or len(yaxis) == 3):
         xaxis.pop(0)
         print("pop 0 x: ", len(xaxis))
         print("value: ", xaxis)
         yaxis.pop(0)
-
 
 def validate_uuid(uid):
     # Validate UUID

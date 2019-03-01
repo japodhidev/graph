@@ -66,8 +66,9 @@
         y_str = y.match(regPat);
 
         // Initiate array population
-        fetchY();
-        fetch();
+        // fetchY();
+        // fetch();
+        getAxes();
 
         var plotTime = new Date();
 
@@ -119,7 +120,9 @@
         var count = 0;
 
         var plotInterval = setInterval(function() {
-            fetch();
+            // fetch();
+            getAxes();
+            getEndpoint();
             var plotTime = new Date();
 
             // fetch and add x_array on every tick
@@ -130,27 +133,37 @@
                 y: [x_array]
             }
 
-            Plotly.extendTraces(x_graph, pltUpdate, [0])
-
-            if (count === 2000) clearInterval(plotInterval);
-        }, 2000);
-
-        var plotIntervalY = setInterval(function() {
-            fetchY();
-            var plotTime = new Date();
-
             // fetch and add y_array on every tick
-            var pltUpdate = {
+            var pltUpdateY = {
                 x: [
                     [plotTime]
                 ],
                 y: [y_array]
             }
 
-            Plotly.extendTraces(y_graph, pltUpdate, [0])
+            Plotly.extendTraces(x_graph, pltUpdate, [0])
+            Plotly.extendTraces(y_graph, pltUpdateY, [0])
 
-            if (count === 2000) clearInterval(plotInterval);
-        }, 2000);
+            if (count === 1000) clearInterval(plotInterval);
+        }, 1000);
+
+        // var plotIntervalY = setInterval(function() {
+        //     // fetchY();
+        //     // getAxes();
+        //     var plotTime = new Date();
+        //
+        //     // fetch and add y_array on every tick
+        //     var pltUpdate = {
+        //         x: [
+        //             [plotTime]
+        //         ],
+        //         y: [y_array]
+        //     }
+        //
+        //     Plotly.extendTraces(y_graph, pltUpdate, [0])
+        //
+        //     if (count === 2000) clearInterval(plotInterval);
+        // }, 2000);
 
         // testUUID();
         //
@@ -177,9 +190,46 @@
         // }
 
         // Ajax call to endpoint, append values to HTML element
+        function getEndpoint() {
+          var request = $.ajax({
+            url: "http://127.0.0.1:8000",
+            method: "GET"
+          });
+
+          request.done(function(){
+            console.log("test");
+          });
+
+          request.fail(function(){
+            console.log("error refreshing");
+          });
+        }
+
+        function getAxes() {
+          var request = $.ajax({
+            url: "http://127.0.0.1:8000/api/axes",
+            dataType: "json",
+            method: "POST"
+          });
+
+          request.done(function(data){
+            var x = Array.from(Object.values(data.x));
+            var y = Array.from(Object.values(data.y));
+            populateAxis(x, x_array);
+            populateAxis(y, y_array);
+            console.log('x: ' + x);
+            console.log('y: ' + y);
+          });
+
+          request.fail(function(jqXHR, textStatus){
+            $("#data-wrapper").css("display", "block");
+            $("#error-alert").html("Request failed: " + textStatus);
+          });
+        }
+
         function fetch() {
             var request = $.ajax({
-                url: "https://sheltered-coast-93272.herokuapp.com/api/xaxis",
+                url: "http://127.0.0.1:8000/api/xaxis",
                 dataType: "json",
                 method: "POST"
             });
@@ -195,7 +245,7 @@
 
         function fetchY() {
             var request = $.ajax({
-                url: "https://sheltered-coast-93272.herokuapp.com/api/yaxis",
+                url: "http://127.0.0.1:8000/api/yaxis",
                 dataType: "json",
                 method: "POST"
             });
@@ -265,7 +315,7 @@
                     a_array.splice(k, dt.length, dt[k]);
                 }
             }
-//            console.log("populated: " + a_array);
+           console.log("populated: " + a_array);
         }
 
         /* Generate UUID */
