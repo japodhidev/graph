@@ -1,40 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Test Ajax</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <!-- <meta http-equiv="refresh" content="15; URL=https://sheltered-coast-93272.herokuapp.com/"> -->
+    <!-- <meta http-equiv="refresh" content="5; URL=http://127.0.0.1:8000/"> -->
+
+    <title>Graph</title>
+    {% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- <script src="{{ url_for('static', filename='plotly-latest.min.js') }}"></script> -->
+    <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
+    {% endblock %}
+
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap-4.3.1.min.css')}}">
+    {% endblock %}
 </head>
+
 <body>
+
     <div class="container">
         <div class="row">
-            <div class="data-wrapper">
+            <div class="col mt-4">
+            </div>
+            <div class="col-auto">
+              <h5 class="mt-5 text-center">Vibration Analysis Graph</h5>
+               <p id="x-value" hidden="hidden">{{ xa }}</p>
+
+                <div id="x_graph" style="width: 800px;height: 400px"></div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-auto">
+               <p id="y-value" hidden="hidden">{{ ya }}</p>
+                <div id="y_graph" style="width: 800px;height: 400px"></div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="data-wrapper" style="display: none">
                 <div id="success-alert" class="alert alert-success"></div>
-                <div class="alert alert-danger"></div>
+                <div id="error-alert" class="alert alert-danger"></div>
             </div>
         </div>
     </div>
-
     <script>
-        var test = setInterval(function(){
-          var request = $.ajax({
-              url: "https://127.0.0.1:8000/api/yaxis",
-              method: "POST",
-              dataType: "json"
-          });
-          request.done(function(msg){
-              $("#success-alert").html(msg);
-              console.log(msg);
-          })
+        // Global variables
+        var y_array = [];
+        var x_array = [];
+        x_graph = document.getElementById('x_graph');
+        y_graph = document.getElementById('y_graph');
+        var x = document.getElementById("x-value").innerHTML;
+        var y = document.getElementById("y-value").innerHTML;
 
-          request.fail(function(jqXHR, textStatus) {
-             $("#error-alert").html("Request failed: " + textStatus);
+        var regPat = /[0-9][.][0-9]+/g;
+        x_str = x.match(regPat);
+        y_str = y.match(regPat);
+
+        // Initiate array population
+
+        // getAxes();
+
+        var plotTime = new Date();
+
+        var plotData = [{
+            x: [plotTime],
+            y: [x_str[0], x_str[1], x_str[2], x_str[3], x_str[4]],
+            mode: 'lines+markers',
+            line: {
+                color: '#80CAF6'
+            },
+            connectgaps: true
+            
+        }];
+
+        var plotDataY = [{
+            x: [plotTime],
+            y: [y_str[0], y_str[1], y_str[2], y_str[3], y_str[4]],
+            mode: 'lines+markers',
+            line: {
+                color: '#FFA500'
+            },
+            connectgaps: true
+        }];
+
+        var plotLayout = {
+            title: "Vibration Analysis Graph - Displacement Against Time",
+            yaxis: {
+                title: "Displacement - X",
+                range: [-0.1, 0.1]
+            },
+            xaxis: {
+                title: "Time"
+            },
+            plot_bgcolor: '#1B3E61',
+            paper_bgcolor: '#FFF3'
+        };
+
+        var plotLayoutY = {
+            title: "Vibration Analysis Graph - Displacement Against Time",
+            yaxis: {
+                title: "Displacement - Y",
+                range: [-0.1, 0.1]
+            },
+            xaxis: {
+                title: "Time"
+            }
+        }
+
+        Plotly.newPlot(x_graph, plotData, plotLayout);
+        Plotly.newPlot(y_graph, plotDataY, plotLayoutY);
+
+        var count = 0;
+        
+        
+        var dataInterval = setInterval(function() {
+          getAxes();
+        }, 2000);
+
+        var plotInterval = setInterval(function() {
+            // fetch();
+            // getAxes();
+            var plotTime = new Date();
+            console.log('x_array: ' + x_array);
+            // fetch and add x_array on every tick
+            var pltUpdate = {
+                x: [
+                    [plotTime]
+                ],
+                y: [x_array]
+                
+            }
+            console.log('y_array: ' + window.y_array);
+            // fetch and add y_array on every tick
+            var pltUpdateY = {
+                x: [
+                    [plotTime]
+                ],
+                y: [y_array]
+            }
+
+            Plotly.extendTraces(x_graph, pltUpdate, [0])
+            Plotly.extendTraces(y_graph, pltUpdateY, [0])
+
+            if (count === 1000) clearInterval(plotInterval);
+        }, 1000);
+
+
+        function getAxes() {
+          var request = $.ajax({
+            url: "http://127.0.0.1:8000/api/axes",
+            dataType: "json",
+            method: "POST"
           });
-        }, 5000);
+
+          request.done(function(data){
+            var x = Array.from(Object.values(data.x));
+            var y = Array.from(Object.values(data.y));
+            populateAxis(x, x_array);
+            populateAxis(y, y_array);
+          });
+
+          request.fail(function(jqXHR, textStatus){
+            $("#data-wrapper").css("display", "block");
+            $("#error-alert").html("Request failed: " + textStatus);
+          });
+        }
+
+        function fetch() {
+            var request = $.ajax({
+                url: "http://127.0.0.1:8000/api/xaxis",
+                dataType: "json",
+                method: "POST"
+            });
+            request.done(function(msg) {
+                populateAxis(msg, x_array);
+            })
+
+            request.fail(function(jqXHR, textStatus) {
+                $("#data-wrapper").css("display", "block");
+                $("#error-alert").html("Request failed: " + textStatus);
+            });
+        }
+
+        function fetchY() {
+            var request = $.ajax({
+                url: "http://127.0.0.1:8000/api/yaxis",
+                dataType: "json",
+                method: "POST"
+            });
+            request.done(function(msg) {
+                populateAxis(msg, y_array);
+            })
+
+            request.fail(function(jqXHR, textStatus) {
+                $("#data-wrapper").css("display", "block");
+                $("#error-alert").html("Request failed: " + textStatus);
+            });
+        }
+
+
+        function populateAxis(dt, a_array) {
+//            console.log("test: " + a_array.length);
+            if (a_array.length == 0) {
+                for (var i = 0; i <= dt.length; i++) {
+                    a_array.push(dt[i]);
+                }
+            } else {
+                // test_array.length = 0;
+                for (var k = 0; k < dt.length; k++) {
+                    a_array.splice(k, dt.length, dt[k]);
+                }
+            }
+           // console.log("populated: " + a_array);
+           return a_array;
+        }
+
+        /* Generate UUID */
+        // function getUUID() {
+        //   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+        //     (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        //   )
+        // }
+
     </script>
 
 </body>
+
 </html>

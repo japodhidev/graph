@@ -3,18 +3,18 @@ import plotly.graph_objs as go
 import requests
 import json
 
-data = '{"x": 0.09, "y": 0.68, "z": 0.23}'
+data = '{"x": 0.80, "y": 0.43, "z": 0.23}'
 
 # for key, value in data.items():
 # 	print (key, value)
 js_dt = json.loads(data)
-print(type(js_dt))
+# print(type(js_dt))
 # axis = 'x'
 # js = json.dumps(axis)
 response = requests.post('http://127.0.0.1:8000',
 	json=js_dt)
 #print ("js_dt: ", js_dt)
-#print ("data: ", type(data))
+print ("data: ", data)
 if response.ok:
 	print(response.text)
 # plotly.tools.set_credentials_file(username='japodhi', api_key='zTs5n4K159uYtkLcYxm3')

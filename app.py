@@ -34,7 +34,8 @@ def pi(name=None):
         x_lst = str(xaxis)
         y_lst = str(yaxis)
         z_lst = str(yaxis)
-        return render_template('index.html', xa=x_lst, ya=y_lst, za=z_lst)
+        return render_template('test.html', xa=x_lst, ya=y_lst, za=z_lst)
+
 
 @app.route('/api', methods=['POST'])
 def rasp(name=None):
@@ -117,7 +118,7 @@ def append_list(dq_x):
 
 def clearList():
     # Limit the length list to 6 elements long
-    if (len(xaxis) == 3 or len(yaxis) == 3):
+    if (len(xaxis) == 4 or len(yaxis) == 4):
         xaxis.pop(0)
         print("pop 0 x: ", len(xaxis))
         print("value: ", xaxis)
@@ -143,7 +144,7 @@ def get_time():
 
 def read_csv():
     ''' Read timestamp, x, y & z values from file '''
-    d_frame = pd.read_csv('histogram.csv')
+    d_frame = pd.read_csv('histogram.csv', nrows=300)
 
     return d_frame
 
