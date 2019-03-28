@@ -96,11 +96,15 @@
             title: "Vibration Analysis Graph - Displacement Against Time",
             yaxis: {
                 title: "Displacement - X",
-                range: [-0.1, 0.1]
+                range: [-0.1, 0.1],
+                gridcolor: '#004c56',
+                zerolinecolor: '#b0b5b5'
             },
             xaxis: {
-                title: "Time"
-            }
+                title: "Time",
+                gridcolor: '#004c56'
+            },
+            plot_bgcolor: '#222830'
         };
 
         var plotLayoutY = {
@@ -110,8 +114,10 @@
                 range: [-0.1, 0.1]
             },
             xaxis: {
-                title: "Time"
-            }
+                title: "Time",
+                gridcolor: '#004c56'
+            },
+            plot_bgcolor: '#222830'
         }
 
         Plotly.newPlot(x_graph, plotData, plotLayout);

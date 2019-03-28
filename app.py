@@ -144,7 +144,7 @@ def get_time():
 
 def read_csv():
     ''' Read timestamp, x, y & z values from file '''
-    d_frame = pd.read_csv('histogram.csv', nrows=300)
+    d_frame = pd.read_csv('histogram.csv', nrows=1000)
 
     return d_frame
 

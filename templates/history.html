@@ -74,22 +74,30 @@
             title: "Vibraration Analysis Graph - Displacement Against Time",
             yaxis: {
                 title: "Displacement - X",
-                range: [-1, 1]
+                range: [-1, 1],
+                gridcolor: '#004c56',
+                zerolinecolor: '#b0b5b5'
             },
             xaxis: {
-                title: "Time"
-            }
+                title: "Time",
+                gridcolor: '#004c56'
+            },
+            plot_bgcolor: '#222830'
         };
 
         var layouty = {
             title: "Vibration Analysis Graph - Displacement Against Time",
             yaxis: {
                 title: "Displacement - Y",
-                range: [-1, 1]
+                range: [-1, 1],
+                gridcolor: '#004c56',
+                zerolinecolor: '#b0b5b5'
             },
             xaxis: {
-                title: "Time"
-            }
+                title: "Time",
+                gridcolor: '#004c56'
+            },
+            plot_bgcolor: '#222830'
         };
 
 
@@ -113,10 +121,13 @@
             title: "Vibration Analysis Graph - Displacement Against Time (Thresholds)",
             yaxis: {
                 title: "Displacement - Y",
-                range: [-1, 2]
+                range: [-1, 2],
+                gridcolor: '#004c56',
+                zerolinecolor: '#b0b5b5'
             },
             xaxis: {
-                title: "Time"
+                title: "Time",
+                gridcolor: '#004c56'
             },
             shapes: [
               {
@@ -132,7 +143,7 @@
                 },
                 layer: "above",
                 fillcolor: 'rgb(255, 83, 13)',
-                opacity: 0.4
+                opacity: 0.3
               },
               {
                 type: 'rect',
@@ -147,9 +158,10 @@
                 },
                 layer: "above",
                 fillcolor: 'rgb(255, 0, 0)',
-                opacity: 0.4
+                opacity: 0.3
               }
-            ]
+            ],
+            plot_bgcolor: '#222830'
           };
 
           Plotly.newPlot(x_graph, data, layout);
