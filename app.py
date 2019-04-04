@@ -10,7 +10,7 @@ import pandas as pd
 # Initialise Flask app
 app = Flask(__name__)
 
-# Flask variables populated by the HTTP POST method from the client
+# Global variables populated by the HTTP POST method from the client (lolz)
 yaxis = []
 xaxis = []
 zaxis = []
