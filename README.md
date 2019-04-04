@@ -12,6 +12,7 @@ This project relies on the following technologies to function:
 * [Bootstrap](https://getbootstrap.com/ "Bootstrap") 
 * [Flask](flask.pocoo.org/ "Flask")
 * [Heroku](https://www.heroku.com/ "Heroku")
+* [jQuery](https://jquery.com/ "jQuery")
 
 ## Decsription
 
