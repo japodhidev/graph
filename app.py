@@ -50,7 +50,7 @@ def rasp(name=None):
 @app.route('/api/<userid>', methods=['POST'])
 def user(userid):
     '''
-        Use the UUID as unique identify, somehow, add checks for validity of the uuid,
+        Use the UUID as a unique identifier, somehow, add checks for validity of the uuid,
         send uuid relevant data back to the requested url
     '''
     boolTry = validators.uuid(str(userid))
